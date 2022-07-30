@@ -1,8 +1,11 @@
+import { getDoc, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 import { marker } from 'leaflet';
-import React,  {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, useContext} from 'react'
+import {UserContext} from '../../App'
 import { v4 as uuidv4 } from 'uuid';
 
-const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker}) => {
+const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setLogType}) => {
 
   const detailsDefault = {
     place: "",
@@ -14,6 +17,9 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker}) => 
   const [newMarker, setNewMarker] = useState(false)
   const [markerDetails, setMarkerDetails] = useState({...detailsDefault})
   const tripNameRef = useRef("")
+  const noTrip = true
+
+  const currentUser = useContext(UserContext)
 
   const makingNewMarker = () => {
     setNewMarker(true)
@@ -34,19 +40,36 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker}) => 
   }
   }, [position])
 
+  const validation = () => {
+    return true
+  }
   
-  const createNewMarker = (e) => {
+  const createNewMarker = async (e) => {
     e.preventDefault()
-    let tempMarker = {...markerDetails}
+    const isValid = validation()
+    if (!isValid) {
+      return
+    }
+    const fetchMarkers = await getDoc(doc(db, 'users', currentUser))
+    let storedMarkers = [...fetchMarkers.data().markers]
+    let tempMarker = {...markerDetails, id: uuidv4()}
     if (noTrip) {
       //introduce tempMarker into array of markers on firebase
+      await updateDoc((doc(db, 'users', currentUser)), {
+        markers: [...storedMarkers, tempMarker]
+      })
     }
+    const tripId = uuidv4()
+    tempMarker.tripId = tripId
+    await updateDoc((doc(db, 'users', currentUser)), {
+      markers: [...storedMarkers, tempMarker]
+    })
     let tempTrip = {
-      tripId: uuidv4();
+      tripId: tripId,
       tripName: tripNameRef.current
     }
     //introduce tempMarker into array of markers on firebase
-  
+    setLogType("view")
   }
 
   return (

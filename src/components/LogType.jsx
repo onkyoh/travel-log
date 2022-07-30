@@ -9,10 +9,8 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker}) => {
 
     let logShown;
 
-
-
     switch (logType) {
-        case 'create': logShown = <CreateLog position={position} setPosition={setPosition} placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}/>; break;
+        case 'create': logShown = <CreateLog position={position} setPosition={setPosition} placingMarker={placingMarker} setPlacingMarker={setPlacingMarker} setLogType={setLogType}/>; break;
         case 'view': logShown = <ViewLog/>; break;
         case 'edit': logShown = <EditLog/>; break;
     }

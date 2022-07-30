@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 * {
   padding: 0;
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -88,5 +90,105 @@ body {
   -webkit-box-shadow: 0px 0px 8px black;
           box-shadow: 0px 0px 8px black;
   border-radius: 50%;
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.login .form_container {
+  width: calc(min(100%, 400px));
+  padding: 1em;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0px 0px 16px black;
+          box-shadow: 0px 0px 16px black;
+  border-radius: 15px;
+}
+
+.login .form_container * {
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.login .form_container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.login .form_container form h2 {
+  text-align: center;
+  color: #f33f90;
+  font-size: 1.75em;
+}
+
+.login .form_container form label {
+  margin-bottom: 0;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.login .form_container form input {
+  height: 2em;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding-left: 1em;
+}
+
+.login .form_container form button {
+  display: block;
+  padding: 0.33em 0.66em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: none;
+  background-color: #f33f90;
+  color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.login .form_container form p {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.login .form_container form p span {
+  color: #f33f90;
+  cursor: pointer;
 }
 /*# sourceMappingURL=App.css.map */
