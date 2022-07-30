@@ -1,0 +1,92 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.app, .map {
+  width: 100%;
+  height: 100%;
+}
+
+.contacts {
+  z-index: 1200;
+  position: absolute;
+  width: 300px;
+  height: 90%;
+  background-color: #f1f1f1;
+  top: 5vh;
+  left: 5vh;
+}
+
+.log_container {
+  z-index: 1200;
+  position: absolute;
+  width: 300px;
+  height: 60%;
+  overflow-y: auto;
+  background-color: #f1f1f1;
+  top: 20%;
+  right: 5vh;
+}
+
+.create_log form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+}
+
+.create_log form div {
+  border: 2px solid red;
+  width: 90%;
+  text-align: center;
+}
+
+.create_log form div label {
+  display: block;
+  text-align: start;
+}
+
+.create_log form div input {
+  width: 100%;
+}
+
+.new_marker {
+  width: 50px;
+  height: 50px;
+  background-color: #f1f1f1;
+  -webkit-box-shadow: 0px 0px 8px black;
+          box-shadow: 0px 0px 8px black;
+  border-radius: 50%;
+}
+
+.trip_marker {
+  width: 50px;
+  height: 50px;
+  -webkit-box-shadow: 0px 0px 8px black;
+          box-shadow: 0px 0px 8px black;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=App.css.map */
