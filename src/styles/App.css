@@ -5,6 +5,8 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+  scroll-margin: 2em;
 }
 
 body {
@@ -32,6 +34,41 @@ body {
   left: 5vh;
 }
 
+button {
+  display: block;
+  padding: 0.33em 0.66em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: none;
+  background-color: #f33f90;
+  color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.img_button {
+  width: 2em;
+  height: 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.img_button img {
+  height: 100%;
+  -webkit-filter: grayscale(1) brightness(3);
+          filter: grayscale(1) brightness(3);
+}
+
 .log_container {
   z-index: 1200;
   position: absolute;
@@ -41,6 +78,9 @@ body {
   background-color: #f1f1f1;
   top: 20%;
   right: 5vh;
+  padding: 1em 0;
+  -webkit-box-shadow: 0px 0px 16px black;
+          box-shadow: 0px 0px 16px black;
 }
 
 .create_log form {
@@ -57,13 +97,15 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1em;
 }
 
 .create_log form div {
-  border: 2px solid red;
   width: 90%;
   text-align: center;
+}
+
+.create_log form div * {
+  margin-bottom: 1em;
 }
 
 .create_log form div label {
@@ -72,6 +114,145 @@ body {
 }
 
 .create_log form div input {
+  width: 90%;
+  font-size: 1.1em;
+  outline: #f33f90 1px solid;
+  border: none;
+  border-radius: 5px;
+  padding: 0.25em 0;
+  padding-left: 0.5em;
+}
+
+.create_log form div input:focus {
+  outline: #f33f90 2px solid;
+}
+
+.create_log form div input[type='checkbox'] {
+  width: auto;
+  position: relative;
+  visibility: hidden;
+  width: 1em;
+  height: 1em;
+}
+
+.create_log form div input[type='checkbox']::after {
+  position: absolute;
+  content: "Yes";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  visibility: visible;
+  background-color: white;
+  color: #f33f90;
+  width: 2em;
+  height: 2em;
+  border: 1px solid #f33f90;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.create_log form div input[type='checkbox']:checked::after {
+  content: '\2713';
+  background-color: #f33f90;
+  color: white;
+}
+
+.create_log form div textarea {
+  width: 90%;
+  height: 100px;
+  resize: none;
+  outline: #f33f90 1px solid;
+  border: none;
+  border-radius: 5px;
+  padding-left: 0.5em;
+}
+
+.create_log form div textarea:focus {
+  outline: #f33f90 2px solid;
+}
+
+.create_log form div select {
+  width: 90%;
+  height: 2em;
+  border: 1px solid #f33f90;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+.create_log form div select option {
+  text-overflow: ellipsis;
+}
+
+.create_log form div select:focus {
+  border: 2px solid #f33f90;
+  outline: none;
+}
+
+.create_log form div .marker_input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 1em;
+  height: 1em;
+}
+
+.create_log form div .marker_input input[type='checkbox'] {
+  width: 3em;
+}
+
+.create_log form div .marker_input input[type='checkbox']::after {
+  content: "Set";
+  width: 3em;
+  padding: 0 0.1em;
+}
+
+.create_log form div .marker_input input[type='checkbox']:checked::after {
+  content: "Setting";
+}
+
+.create_log form div .marker_input * {
+  margin-bottom: 0;
+}
+
+.create_log form div .marker_input span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 5px;
+  border: 1px solid #f33f90;
+  height: 2.25em;
+  width: 50%;
+  background-color: white;
+}
+
+.create_log form div div {
   width: 100%;
 }
 
@@ -90,6 +271,7 @@ body {
   -webkit-box-shadow: 0px 0px 8px black;
           box-shadow: 0px 0px 8px black;
   border-radius: 50%;
+  background-color: #f33f90;
 }
 
 .login {
@@ -165,21 +347,6 @@ body {
   border-radius: 5px;
   border: 1px solid gray;
   padding-left: 1em;
-}
-
-.login .form_container form button {
-  display: block;
-  padding: 0.33em 0.66em;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  border: none;
-  background-color: #f33f90;
-  color: white;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 1.2em;
-  cursor: pointer;
 }
 
 .login .form_container form p {

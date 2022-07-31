@@ -1,25 +1,27 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { MapContainer, TileLayer, Marker} from 'react-leaflet'
 import Leaflet from 'leaflet'
 import CreateMarker from './CreateMarker'
 import { db } from '../firebase-config'
 import { doc, getDoc } from '@firebase/firestore'
+import {UserContext } from '../App'
 
 const Map = ({position, setPosition, placingMarker}) => {
 
+  const currentUser = useContext(UserContext)
 
   const [userTrips, setUserTrips] = useState([])
   const [markers, setMarkers] = useState([])
 
   const getMarkers = async () => {
-    const fetchMarkers = await getDoc(doc(db, 'users', '66TmP6Vr7jDKbSA5a47a'))
+    const fetchMarkers = await getDoc(doc(db, 'users', currentUser))
     setMarkers([...fetchMarkers.data().markers])
+    console.log(fetchMarkers.data().markers)
   }
 
-  const tripMarkers = Leaflet.divIcon({
+  const markerIcons = Leaflet.divIcon({
     className: 'trip_marker',
     iconSize: [30, 30],
-    backgroundColor: 'red'
   })
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const Map = ({position, setPosition, placingMarker}) => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {markers && markers.map((marker) => (
-            <Marker key={marker.id} position={marker.coordinates} icon={tripMarkers} eventHandlers={{
+            <Marker key={marker.id} position={marker.coordinates} icon={markerIcons} eventHandlers={{
               click: () => openLog(marker.id),
             }}/>
         ))}

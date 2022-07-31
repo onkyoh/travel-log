@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Marker, useMapEvents} from 'react-leaflet'
 import Leaflet from 'leaflet'
 
@@ -17,6 +17,12 @@ const CreateMarker = ({position, setPosition, placingMarker}) => {
         className: 'new_marker',
         iconSize: [30, 30],
       })
+
+    useEffect(() => {
+       if (position) {
+            map.flyTo([position.lat, position.lng])
+        }
+    }, [position])
 
   return (
     position && <Marker position={position} icon={createMarker}/>

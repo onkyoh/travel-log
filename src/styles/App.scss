@@ -19,6 +19,8 @@ $main-pink: #f33f90;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+    scroll-margin: 2em;
 }
 
 body {
@@ -45,6 +47,29 @@ body {
     left: 5vh;
 }
 
+button {
+    display: block;
+    padding: 0.33em 0.66em;
+    width: fit-content;
+    border: none;
+    background-color: $main-pink;
+    color: white;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.img_button {
+    width: 2em;
+    height: 2em;
+    @include flexCenter();
+    img {
+        height: 100%;
+        filter: grayscale(1) brightness(3);
+    }
+}
+
 .log_container {
     @include topLayer();
     width: 300px;
@@ -53,22 +78,125 @@ body {
     background-color: $background;
     top: 20%;
     right: 5vh;
+    padding: 1em 0;
+    box-shadow: 0px 0px 16px black;
 }
 
 .create_log {
     form {
         @include flexCenter();
         flex-direction: column;
-        gap: 1em;
         div {
-            border: 2px solid red;
             width: 90%;
             text-align: center;
+            * {
+                margin-bottom: 1em;
+            }
             label {
                 display: block;
                 text-align: start;
             }
             input {
+                width: 90%;
+                font-size: 1.1em;
+                outline: $main-pink 1px solid;
+                border: none;
+                border-radius: 5px;
+                padding: 0.25em 0;
+                padding-left: 0.5em;
+                &:focus {
+                    outline: $main-pink 2px solid;
+                }
+            }
+            input[type='checkbox'] {
+                width: auto;
+                position: relative;
+                visibility: hidden;
+                width: 1em;
+                height: 1em;
+                &::after {
+                    position: absolute;
+                    content: "Yes";
+                    @include flexCenter();
+                    visibility: visible;
+                    background-color: white;
+                    color: $main-pink;
+                    width: 2em;
+                    height: 2em;
+                    border: 1px solid $main-pink;
+                    border-radius: 5px;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    cursor: pointer;
+                }
+                &:checked {
+                    &::after {
+                        content: '\2713';
+                        background-color: $main-pink;
+                        color: white;
+                    }
+                }
+            }
+            textarea {
+                width: 90%;
+                height: 100px;
+                resize: none;
+                outline: $main-pink 1px solid;
+                border: none;
+                border-radius: 5px;
+                padding-left: 0.5em;
+                &:focus {
+                    outline: $main-pink 2px solid;
+                }
+            }
+            select {
+                width: 90%;
+                height: 2em;
+                border: 1px solid $main-pink;
+                border-radius: 5px;
+                font-size: 1.1em;
+                option {
+                    text-overflow: ellipsis;
+                }
+                &:focus {
+                    border: 2px solid $main-pink;
+                    outline: none;
+                }
+            }
+            .marker_input {
+                @include flexCenter();
+                justify-content: space-between;
+                width: 90%;
+                margin: auto;
+                margin-bottom: 1em;
+                height: 1em;
+                input[type='checkbox'] {
+                    width: 3em;
+                    &::after {
+                        content: "Set";
+                        width: 3em;
+                        padding: 0 0.1em;
+                    }
+                    &:checked {
+                        &::after {
+                            content: "Setting"
+                        }
+                    }
+                }
+                * {
+                    margin-bottom: 0;
+                }
+                span {
+                    @include flexCenter();
+                    border-radius: 5px;
+                    border: 1px solid $main-pink;
+                    height: 2.25em;
+                    width: 50%;
+                    background-color: white;
+                }
+            }
+            div {
                 width: 100%;
             }
         }
@@ -88,6 +216,7 @@ body {
     height: 50px;
     box-shadow: 0px 0px 8px black;
     border-radius: 50%;
+    background-color: $main-pink
 }
 
 .login {
@@ -125,18 +254,6 @@ body {
                 border-radius: 5px;
                 border: 1px solid gray;
                 padding-left: 1em;
-            }
-            button {
-                display: block;
-                padding: 0.33em 0.66em;
-                width: fit-content;
-                border: none;
-                background-color: $main-pink;
-                color: white;
-                border-radius: 5px;
-                font-weight: 500;
-                font-size: 1.2em;
-                cursor: pointer;
             }
             p {
                 margin-bottom: 0;
