@@ -128,6 +128,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
         markers: [...storedMarkers, tempMarker]
       })
       setLogType("view")
+      setPosition(null)
       return
     }
 
@@ -145,6 +146,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
         trips: [...tripNames, tempTrip]
       })
       setLogType("view")
+      setPosition(null)
       return
     }
 
@@ -156,6 +158,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
         markers: [...storedMarkers, tempMarker]
       })
       setLogType("view")
+      setPosition(null)
       return
     }
   }

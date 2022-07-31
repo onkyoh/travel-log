@@ -69,18 +69,74 @@ button {
           filter: grayscale(1) brightness(3);
 }
 
-.log_container {
+.log_aside {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   z-index: 1200;
   position: absolute;
-  width: 300px;
-  height: 60%;
-  overflow-y: auto;
-  background-color: #f1f1f1;
   top: 20%;
   right: 5vh;
-  padding: 1em 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   -webkit-box-shadow: 0px 0px 16px black;
           box-shadow: 0px 0px 16px black;
+}
+
+.log_button_group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.log_button_group button {
+  width: 100%;
+  border-radius: 0px;
+  background-color: white;
+  color: #f33f90;
+  border: 1px solid #f33f90;
+}
+
+.log_button_group button:nth-of-type(1), .log_button_group button:nth-of-type(2) {
+  border-right: none;
+}
+
+.log_container {
+  width: 300px;
+  height: 60vh;
+  overflow-y: auto;
+  background-color: #f1f1f1;
+  padding: 1em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .create_log form {

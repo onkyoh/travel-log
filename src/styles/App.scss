@@ -70,16 +70,39 @@ button {
     }
 }
 
-.log_container {
+.log_aside {
+    height: fit-content;
+    @include flexCenter();
+    flex-direction: column;
     @include topLayer();
-    width: 300px;
-    height: 60%;
-    overflow-y: auto;
-    background-color: $background;
     top: 20%;
     right: 5vh;
-    padding: 1em 0;
+    width: max-content;
     box-shadow: 0px 0px 16px black;
+}
+
+.log_button_group {
+    @include flexCenter();
+    width: 100%;
+    button {
+        width: 100%;
+        border-radius: 0px;
+        background-color: white;
+        color: $main-pink;
+        border: 1px solid $main-pink;
+        &:nth-of-type(1), &:nth-of-type(2) {
+            border-right: none;
+        }
+    }
+}
+
+.log_container {
+    width: 300px;
+    height: 60vh;
+    overflow-y: auto;
+    background-color: $background;
+    padding: 1em 0;
+    @include flexCenter();
 }
 
 .create_log {

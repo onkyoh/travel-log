@@ -6,7 +6,7 @@ import { db } from '../firebase-config'
 import { doc, getDoc } from '@firebase/firestore'
 import {UserContext } from '../App'
 
-const Map = ({position, setPosition, placingMarker}) => {
+const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers}) => {
 
   const currentUser = useContext(UserContext)
 
@@ -26,12 +26,19 @@ const Map = ({position, setPosition, placingMarker}) => {
 
   useEffect(() => {
       //will get usersMakers from firebase
-      getMarkers()      
-  }, [])
+      if (refreshMarkers === 0) {
+        getMarkers() 
+      } else {
+        setTimeout(() => {
+          getMarkers()
+        }, 1000)
+      }  
+  }, [refreshMarkers])
 
   const openLog = (id) => {
     //go to firebase  
     console.log(id)
+    setLogId(id)
   }
   
   return (

@@ -13,11 +13,25 @@ const MainInterface = () => {
 
     const [placingMarker, setPlacingMarker] = useState(false)
 
+    const [logId, setLogId] = useState("")
+
+    const [refreshMarkers, setRefreshMarkers] = useState(0)
+
   return (
     <>
-        <Map setMarkerCoords={setMarkerCoords} position={position} setPosition={setPosition} placingMarker={placingMarker}/>
+        <Map 
+        setMarkerCoords={setMarkerCoords} 
+        position={position} setPosition={setPosition} 
+        placingMarker={placingMarker} setLogId={setLogId}
+        refreshMarkers={refreshMarkers}/>
+
         {showContacts && <Contacts/>}
-        <LogType markerCoords={markerCoords} position={position} setPosition={setPosition} placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}/>
+
+        <LogType markerCoords={markerCoords} 
+        position={position} setPosition={setPosition} 
+        placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
+        logId={logId} 
+        refreshMarkers={refreshMarkers} setRefreshMarkers={setRefreshMarkers}/>
     </>
   )
 }
