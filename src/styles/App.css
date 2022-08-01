@@ -12,6 +12,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 #root {
@@ -333,6 +334,76 @@ button {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1em;
+  overflow-x: hidden;
+}
+
+.view_log .view_img_grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  gap: 0.5em;
+  width: 90%;
+}
+
+.view_log .view_img_grid div {
+  width: 120px;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #0f0f0f;
+  cursor: pointer;
+}
+
+.view_log .view_img_grid div img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.view_log .fullscreen_img {
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.view_log .fullscreen_img::before {
+  content: "";
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(15, 15, 15, 0.9);
+}
+
+.view_log .fullscreen_img button {
+  position: absolute;
+  top: -2em;
+  right: -2em;
+}
+
+.view_log .fullscreen_img img {
+  position: relative;
 }
 
 .new_marker {

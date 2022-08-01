@@ -1,7 +1,11 @@
-import React, {useState, createContext} from 'react'
+import React, {useState, createContext, useEffect, useContext} from 'react'
 import Contacts from '../components/Contacts'
 import Map from '../components/Map'
 import LogType from '../components/LogType'
+import { getDoc, doc } from 'firebase/firestore'
+import { db } from '../firebase-config'
+import { UserContext } from '../App'
+
 
 export const MarkerContext = createContext()
 
@@ -20,6 +24,17 @@ const MainInterface = () => {
     const [refreshMarkers, setRefreshMarkers] = useState(0)
 
     const [markers, setMarkers] = useState([])
+
+    const currentUser = useContext(UserContext)
+
+    const getMarkers = async () => {
+      const markerData = await getDoc(doc(db, 'users', currentUser))
+      setMarkers([...markerData.data().markers])
+    }
+
+    useEffect(() => {
+      getMarkers()
+    }, [refreshMarkers])
   
   return (
     <>  

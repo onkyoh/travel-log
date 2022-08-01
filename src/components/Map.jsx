@@ -4,38 +4,18 @@ import Leaflet from 'leaflet'
 import CreateMarker from './CreateMarker'
 import { db } from '../firebase-config'
 import { doc, getDoc } from '@firebase/firestore'
-import {UserContext } from '../App'
+import { UserContext } from '../App'
+import { MarkerContext } from '../screens/MainInterface'
 
-const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers, setMarkers, markers}) => {
+const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers}) => {
 
   const currentUser = useContext(UserContext)
-
-  const getMarkers = async () => {
-    const fetchMarkers = await getDoc(doc(db, 'users', currentUser))
-    setMarkers([...fetchMarkers.data().markers])
-  }
-
-  const getRefreshedMarkers = async () => {
-    const fetchMarkers = await getDoc(doc(db, 'users', currentUser))
-    let tempmarkers = [...fetchMarkers.data().markers]
-    while ([...tempmarkers] === [...markers]) {
-      getRefreshedMarkers()
-    }
-    setMarkers([...tempmarkers])
-  }
+  const markers = useContext(MarkerContext)
 
   const markerIcons = Leaflet.divIcon({
     className: 'trip_marker',
     iconSize: [30, 30],
   })
-
-  useEffect(() => {
-      if (refreshMarkers === 0) {
-        getMarkers() 
-      } else {
-        getRefreshedMarkers()
-      }  
-  }, [refreshMarkers])
 
   const openLog = (id) => {
     //triggers useEffect in viewLog to query through markers and get details for marker with id = logId

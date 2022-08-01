@@ -26,6 +26,7 @@ $main-pink: #f33f90;
 body {
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 #root {
@@ -234,6 +235,51 @@ button {
     justify-content: flex-start;
     flex-direction: column;
     gap: 1em;
+    overflow-x: hidden;
+    .view_img_grid {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 0.5em;
+        width: 90%;
+        div {
+            width: 120px;
+            height: 60px;
+            @include flexCenter();
+            background-color: rgb(15, 15,15);
+            cursor: pointer;
+            img {
+                max-height: 100%;
+                max-width: 100%;
+
+            }
+        }
+    }
+    .fullscreen_img {
+        width: auto;
+        height: auto;
+        max-width: 90vw;
+        max-height: 90vh;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include flexCenter();
+        &::before {
+            content: "";
+            position: absolute;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(15, 15, 15, 0.9);
+        }
+        button {
+            position: absolute;
+            top: -2em;
+            right: -2em;
+        }
+        img {
+            position: relative;
+        }
+    }
 }
 
 .new_marker {
