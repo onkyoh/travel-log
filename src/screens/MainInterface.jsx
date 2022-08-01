@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, createContext} from 'react'
 import Contacts from '../components/Contacts'
 import Map from '../components/Map'
 import LogType from '../components/LogType'
+
+export const MarkerContext = createContext()
 
 const MainInterface = () => {
 
@@ -17,13 +19,17 @@ const MainInterface = () => {
 
     const [refreshMarkers, setRefreshMarkers] = useState(0)
 
+    const [markers, setMarkers] = useState([])
+  
   return (
-    <>
+    <>  
+      <MarkerContext.Provider value={markers}>
         <Map 
         setMarkerCoords={setMarkerCoords} 
         position={position} setPosition={setPosition} 
         placingMarker={placingMarker} setLogId={setLogId}
-        refreshMarkers={refreshMarkers}/>
+        refreshMarkers={refreshMarkers} 
+        markers={markers} setMarkers={setMarkers}/>
 
         {showContacts && <Contacts/>}
 
@@ -32,6 +38,7 @@ const MainInterface = () => {
         placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
         logId={logId} 
         refreshMarkers={refreshMarkers} setRefreshMarkers={setRefreshMarkers}/>
+      </MarkerContext.Provider>
     </>
   )
 }

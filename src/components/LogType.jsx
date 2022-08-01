@@ -20,9 +20,6 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
 
     const handleLogType = (type) => {
       setLogType(type)
-      if (logType !== 'view' && type === 'view') {
-        setRefreshMarkers(refreshMarkers + 1)
-      } 
     }
 
     const activeTab = {
@@ -34,6 +31,9 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
       if (placingMarker) {
         setPlacingMarker(false)
       }
+      if (logType === 'view') {
+        setRefreshMarkers(refreshMarkers + 1)
+      } 
     }, [logType])
 
   return (

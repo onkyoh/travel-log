@@ -1,9 +1,13 @@
 import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import { storage } from '../../firebase-config';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { marker } from 'leaflet';
 import React, {useState, useRef, useEffect, useContext, useMemo} from 'react'
 import {UserContext} from '../../App'
 import { v4 as uuidv4 } from 'uuid';
+import { MarkerContext } from '../../screens/MainInterface'
+import { upload } from '@testing-library/user-event/dist/upload';
 
 const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setLogType}) => {
 
@@ -25,6 +29,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
   const errorRef = useRef("")
 
   const currentUser = useContext(UserContext)
+  const markers = useContext(MarkerContext)
 
   //start create log process
 
@@ -55,6 +60,10 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
   //updates on every input field change
 
   const handleMarkerDetails = (e, field) => {
+    if (field === 'pics') {
+      setMarkerDetails({...markerDetails, pics: e.target.files})
+      return
+    }
     setMarkerDetails({...markerDetails, [field]: e.target.value})
   }
 
@@ -108,6 +117,26 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
 
   //form submit to create marker
 
+  const uploadPics = async () => {
+    console.log('is called')
+    let imageNames = []
+    let tempImages = []
+    let picArray = [...markerDetails.pics]
+
+    const fetchMap = async () => {
+        return Promise.all(picArray.map(async(pic, i) => {
+        const imageRef = ref(storage, `/${uuidv4()}`)
+        const uploaded = await uploadBytes(imageRef, picArray[i])
+        if (!uploaded) {
+          return
+        }
+        const url = await getDownloadURL(ref(imageRef))
+        return url
+      }))
+    }
+    return fetchMap()
+  }
+
   const createNewMarker = async (e) => {
     e.preventDefault()
     const validationError = logValidation()
@@ -117,15 +146,23 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
       errorRef.current.scrollIntoView()
       return
     }
+    
+    let tempMarker = {...markerDetails}
 
-    const fetchMarkers = await getDoc(doc(db, 'users', currentUser))
-    let storedMarkers = [...fetchMarkers.data().markers]
-    let tempMarker = {...markerDetails, id: uuidv4()}
+    if (tempMarker.pics.length > 0) {
+      const imageUrls = await uploadPics()
+      console.log('image urls', imageUrls)
+      tempMarker = {...tempMarker, pics: imageUrls}
+    } 
+      
+    tempMarker = {...tempMarker, id: uuidv4()}
+
+    console.log(tempMarker)
 
     if (noTrip) {
       //introduce tempMarker into array of markers on firebase
       await updateDoc((doc(db, 'users', currentUser)), {
-        markers: [...storedMarkers, tempMarker]
+        markers: [...markers, tempMarker]
       })
       setLogType("view")
       setPosition(null)
@@ -142,7 +179,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
         tripName: tripNameRef.current.value.trim()
       }
       await updateDoc((doc(db, 'users', currentUser)), {
-        markers: [...storedMarkers, tempMarker],
+        markers: [...markers, tempMarker],
         trips: [...tripNames, tempTrip]
       })
       setLogType("view")
@@ -155,7 +192,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
       let existingTripId = tripNames[idx].tripId
       tempMarker.tripId = existingTripId
       await updateDoc((doc(db, 'users', currentUser)), {
-        markers: [...storedMarkers, tempMarker]
+        markers: [...markers, tempMarker]
       })
       setLogType("view")
       setPosition(null)
@@ -201,7 +238,8 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
             <span style={{float: "right"}}>{markerDetails.desc.length || 0}/140</span>
           </div>
           <div>
-            {/* TODO: ADD PIC UPLOADING */}
+            {/* images */}
+            <input type="file" multiple onChange={(e) => handleMarkerDetails(e, "pics")}/>
           </div>
           <div>
             <label htmlFor="trip_check">Was this part of a trip?</label>

@@ -21,7 +21,7 @@ const Login = ({setCurrentUser}) => {
             const cred = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
             console.log(cred)
             const createUser = async () => {
-                await setDoc(doc(db, "users", cred.user.uid), {contacts: [], trips: [], markers: []})
+                await setDoc(doc(db, "users", cred.user.uid), {contacts: [], trips: [], markers: [], email: registerEmail})
                 console.log('created')
             }
             createUser()

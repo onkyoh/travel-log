@@ -6,17 +6,22 @@ import { db } from '../firebase-config'
 import { doc, getDoc } from '@firebase/firestore'
 import {UserContext } from '../App'
 
-const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers}) => {
+const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers, setMarkers, markers}) => {
 
   const currentUser = useContext(UserContext)
-
-  const [userTrips, setUserTrips] = useState([])
-  const [markers, setMarkers] = useState([])
 
   const getMarkers = async () => {
     const fetchMarkers = await getDoc(doc(db, 'users', currentUser))
     setMarkers([...fetchMarkers.data().markers])
-    console.log(fetchMarkers.data().markers)
+  }
+
+  const getRefreshedMarkers = async () => {
+    const fetchMarkers = await getDoc(doc(db, 'users', currentUser))
+    let tempmarkers = [...fetchMarkers.data().markers]
+    while ([...tempmarkers] === [...markers]) {
+      getRefreshedMarkers()
+    }
+    setMarkers([...tempmarkers])
   }
 
   const markerIcons = Leaflet.divIcon({
@@ -25,24 +30,20 @@ const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers}) =
   })
 
   useEffect(() => {
-      //will get usersMakers from firebase
       if (refreshMarkers === 0) {
         getMarkers() 
       } else {
-        setTimeout(() => {
-          getMarkers()
-        }, 1000)
+        getRefreshedMarkers()
       }  
   }, [refreshMarkers])
 
   const openLog = (id) => {
-    //go to firebase  
-    console.log(id)
+    //triggers useEffect in viewLog to query through markers and get details for marker with id = logId
     setLogId(id)
   }
   
   return (
-    <MapContainer className='map' center={[51.505, -0.09]} zoom={5}>
+    <MapContainer className='map' center={[49, -80]} zoom={4}>
         <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
