@@ -6,7 +6,6 @@
           box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
   scroll-behavior: smooth;
-  scroll-margin: 2em;
 }
 
 body {
@@ -275,13 +274,20 @@ button {
   height: 1em;
 }
 
+.create_log form div .marker_input button {
+  height: 1.75em;
+}
+
 .create_log form div .marker_input input[type='checkbox'] {
   width: 3em;
+  height: 2em;
 }
 
 .create_log form div .marker_input input[type='checkbox']::after {
   content: "Set";
   width: 3em;
+  height: 1.75em;
+  font-size: 1em;
   padding: 0 0.1em;
 }
 
@@ -305,13 +311,34 @@ button {
           align-items: center;
   border-radius: 5px;
   border: 1px solid #f33f90;
-  height: 2.25em;
+  height: 2em;
   width: 50%;
+  font-size: 1em;
   background-color: white;
 }
 
 .create_log form div div {
   width: 100%;
+}
+
+.create_log form .date_input {
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5em;
+  margin: auto;
+}
+
+.create_log form .date_input button {
+  height: 2em;
+  font-size: 1em;
 }
 
 .view_log {
@@ -398,12 +425,15 @@ button {
 
 .view_log .fullscreen_img button {
   position: absolute;
-  top: -2em;
-  right: -2em;
+  top: 1em;
+  right: 1em;
+  z-index: 1500;
 }
 
 .view_log .fullscreen_img img {
   position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 
 .new_marker {

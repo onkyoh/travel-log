@@ -1,31 +1,8 @@
-import React, {useContext, useEffect, useState} from 'react'
-import { UserContext } from '../../App'
-import { MarkerContext } from '../../screens/MainInterface'
+import React, {useState} from 'react'
 
+const ViewLog = ({currentMarker}) => {
 
-const ViewLog = ({logId}) => {
-
-  const currentUser = useContext(UserContext)
-  const markers = useContext(MarkerContext)
-
-  const [currentMarker, setCurrentMarker] = useState()
   const [bigImg, setBigImg] = useState("")
-
-  const getLogData = () => {
-    const idx = markers.findIndex(marker => marker.id === logId)
-    if (idx === -1) {
-      console.log('This logs details could not be found.')
-      return
-    }
-    setCurrentMarker(markers[idx])
-    console.log(markers[idx])
-  }
-
-  useEffect(() => {
-    if (logId) {
-      getLogData()
-    }
-  }, [logId])
 
   const fullscreenImg = (idx) => {
     setBigImg(currentMarker.pics[idx])
@@ -48,7 +25,7 @@ const ViewLog = ({logId}) => {
             <div className='view_img_grid'>
                 {currentMarker.pics.map((pic, i) => (
                   <div key={pic} onClick={() => fullscreenImg(i)}>
-                    <img src={pic} alt='trip picture'/>
+                    <img src={pic} alt='trip'/>
                   </div>
                 ))}              
             </div>
@@ -57,7 +34,7 @@ const ViewLog = ({logId}) => {
         {bigImg && 
           <div className='fullscreen_img'>
             <button onClick={closeFullscreen}>X</button>
-            <img src={bigImg} alt='fullscreen trip picture'/>
+            <img src={bigImg} alt='fullscreen trip'/>
           </div>
         }
       </div>

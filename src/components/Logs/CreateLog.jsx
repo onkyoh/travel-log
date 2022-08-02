@@ -2,12 +2,11 @@ import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { storage } from '../../firebase-config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { marker } from 'leaflet';
-import React, {useState, useRef, useEffect, useContext, useMemo} from 'react'
+import React, {useState, useRef, useEffect, useContext} from 'react'
 import {UserContext} from '../../App'
-import { v4 as uuidv4 } from 'uuid';
 import { MarkerContext } from '../../screens/MainInterface'
-import { upload } from '@testing-library/user-event/dist/upload';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setLogType}) => {
 
@@ -30,6 +29,8 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
 
   const currentUser = useContext(UserContext)
   const markers = useContext(MarkerContext)
+
+  const date = new Date()
 
   //start create log process
 
@@ -55,6 +56,13 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
     () => {
       console.log('couldnt fetch location')
     })
+  }
+
+  //get current date
+
+  const handleCurrentDate = () => {
+    const currentDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+    setMarkerDetails({...markerDetails, date: currentDate})
   }
 
   //updates on every input field change
@@ -118,9 +126,6 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
   //form submit to create marker
 
   const uploadPics = async () => {
-    console.log('is called')
-    let imageNames = []
-    let tempImages = []
     let picArray = [...markerDetails.pics]
 
     const fetchMap = async () => {
@@ -213,8 +218,8 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
       {
       newMarker &&
         <form onSubmit={(e) => createNewMarker(e)}>
+          <span style={{color: 'red'}} ref={errorRef}>{error}</span>
           <div>
-            <span style={{color: 'red'}} ref={errorRef}>{error}</span>
             <label htmlFor="place">Location</label>
             <input id="place" placeholder='Toronto, Canada' value={markerDetails.place  || ""} onChange={(e) => handleMarkerDetails(e, "place")}/>
           </div>
@@ -222,7 +227,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
             <label htmlFor="marker_check">Coordinates *</label>
             <div className='marker_input'>
               <span>
-                {position && parseFloat(position.lat).toFixed(3) + ", " + parseFloat(position.lng).toFixed(3)}
+                {position && parseFloat(position.lat).toFixed(2) + ", " + parseFloat(position.lng).toFixed(2)}
               </span>
               <input id="marker_check" type="checkbox" onChange={handlePlacingMarker}/>
               <button type="button" onClick={handleCurrentLocation} className='img_button'><img src="https://img.icons8.com/color/48/000000/marker--v1.png" alt="current_location" /></button>
@@ -230,7 +235,10 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
           </div>
           <div>
             <label htmlFor="date">Date</label>
-            <input id="date" placeholder="DD/MM/YYYY" value={markerDetails.date || ""} onChange={(e) => handleMarkerDetails(e, "date")}/>
+            <div className='date_input'>
+              <input id="date" placeholder="DD/MM/YYYY" value={markerDetails.date || ""} onChange={(e) => handleMarkerDetails(e, "date")}/>
+              <button type='button' onClick={handleCurrentDate}>Today</button>
+            </div>
           </div>
           <div>
             <label htmlFor="desc">Description</label>
