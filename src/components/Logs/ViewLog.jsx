@@ -15,22 +15,18 @@ const ViewLog = ({currentMarker}) => {
   return (
     <div className='log_container'>
       {!currentMarker ? 
-      <p>Please select a marker to view.</p> 
+      <p>Please selects a marker to view.</p> 
       :
-      <div className='view_log'>
-        <div>
-            {currentMarker.place && <p>{currentMarker.place}</p>}
-            <p>{currentMarker.coordinates[0].toFixed(3) + ', ' +  currentMarker.coordinates[1].toFixed(3)}</p>
+      <div className='log_container view_log'>
             {currentMarker.pics.length > 0 &&
-            <div className='view_img_grid'>
-                {currentMarker.pics.map((pic, i) => (
-                  <div key={pic} onClick={() => fullscreenImg(i)}>
-                    <img src={pic} alt='trip'/>
+                currentMarker.pics.map((pic, i) => (
+                  <div className='polaroid'>
+                    <div key={pic} onClick={() => fullscreenImg(i)}>
+                      <img src={pic} alt='trip'/>
+                    </div>
                   </div>
-                ))}              
-            </div>
+                ))            
             }
-        </div> 
         {bigImg && 
           <div className='fullscreen_img'>
             <button onClick={closeFullscreen}>X</button>

@@ -4,7 +4,7 @@ import EditLog from './Logs/EditLog';
 import ViewLog from './Logs/ViewLog';
 import { MarkerContext } from '../screens/MainInterface';
 
-const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId, setLogId, refreshMarkers, setRefreshMarkers}) => {
+const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId, setLogId, refreshMarkers, setRefreshMarkers, showLogs}) => {
 
     const [logType, setLogType] = useState("create")
     const [currentMarker, setCurrentMarker] = useState()
@@ -56,13 +56,13 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
     }, [logId])
 
   return (
-    <aside className='log_aside'>  
+    <aside className='log_aside' style={showLogs ? {visibility: 'visible'} : {visibility: 'hidden'}}>  
       <div className='log_button_group'>
         <button onClick={() => handleLogType('view')} style={logType === 'view' ? activeTab : null}>View</button>
         <button onClick={() => handleLogType('create')} style={logType === 'create' ? activeTab : null}>Create</button>
         <button onClick={() => handleLogType('edit')} style={logType === 'edit' ? activeTab : null}>Edit</button>
       </div>
-        {logShown}
+      {logShown}
     </aside>
   )
 }

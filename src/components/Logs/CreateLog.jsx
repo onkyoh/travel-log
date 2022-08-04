@@ -249,7 +249,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
             {/* images */}
             <input type="file" multiple onChange={(e) => handleMarkerDetails(e, "pics")}/>
           </div>
-          <div>
+          <div className='trip_input'>
             <label htmlFor="trip_check">Was this part of a trip?</label>
             <input id="trip_check" type="checkbox" onChange={handleTripCheck}/>
           </div>

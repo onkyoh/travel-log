@@ -11,7 +11,9 @@ export const MarkerContext = createContext()
 
 const MainInterface = () => {
 
-    const showContacts = false
+    const [showContacts, setShowContacts] = useState(true)
+
+    const [showLogs, setShowLogs] = useState(true)
 
     const [markerCoords, setMarkerCoords] = useState([]) 
 
@@ -36,6 +38,14 @@ const MainInterface = () => {
       getMarkers()
     }, [refreshMarkers])
   
+    const toggleContacts = () => {
+      setShowContacts(!showContacts)
+    }
+    
+    const toggleLogs = () => {
+      setShowLogs(!showLogs)
+    }
+
   return (
     <>  
       <MarkerContext.Provider value={markers}>
@@ -46,13 +56,20 @@ const MainInterface = () => {
         refreshMarkers={refreshMarkers} 
         markers={markers} setMarkers={setMarkers}/>
 
-        {showContacts && <Contacts/>}
+        <Contacts showContacts={showContacts}/>
 
         <LogType markerCoords={markerCoords} 
         position={position} setPosition={setPosition} 
         placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
         logId={logId} 
-        refreshMarkers={refreshMarkers} setRefreshMarkers={setRefreshMarkers}/>
+        refreshMarkers={refreshMarkers} setRefreshMarkers={setRefreshMarkers}
+        showLogs={showLogs}/>
+        
+        <div className='util_buttons'>
+          <button onClick={toggleContacts}>O</button>
+          <div>trips</div>
+          <button onClick={toggleLogs}>N</button>
+        </div>
       </MarkerContext.Provider>
     </>
   )

@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Contacts = () => {
+const Contacts = ({showContacts}) => {
   return (
-    <div className='contacts'>
+    <div className='contacts' style={showContacts ? {visibility: 'visible'} : {visibility: 'hidden'}}>
         Contacts
     </div>
   )
