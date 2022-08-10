@@ -1,16 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 const ViewLog = ({currentMarker}) => {
-
-  const [bigImg, setBigImg] = useState("")
-
-  const fullscreenImg = (idx) => {
-    setBigImg(currentMarker.pics[idx])
-  }
-
-  const closeFullscreen = () => {
-    setBigImg("")
-  }
 
   return (
     <div className='log_container'>
@@ -18,21 +8,30 @@ const ViewLog = ({currentMarker}) => {
       <p>Please selects a marker to view.</p> 
       :
       <div className='log_container view_log'>
+          <div className='view_details'>
+            <h5>Where?</h5>
+            <p>
+            {currentMarker.place || ""}
+            {currentMarker.place ? <br/> : ""}
+            {currentMarker.coordinates[0].toFixed(3) + ' , '+ currentMarker.coordinates[1].toFixed(3)}
+            </p>
+          </div>
+          <div className='view_details'>
+            <h5>What?</h5>
+            <p>{currentMarker.desc}</p>
+          </div>
+          <div className='polaroid_grid'>
             {currentMarker.pics.length > 0 &&
                 currentMarker.pics.map((pic, i) => (
-                  <div className='polaroid'>
-                    <div key={pic} onClick={() => fullscreenImg(i)}>
+                  <a className='polaroid' href={pic} target="_blank" rel="noreferrer">
+                    <div>
                       <img src={pic} alt='trip'/>
                     </div>
-                  </div>
+                    <span>{currentMarker.date || ""}</span>
+                  </a>
                 ))            
             }
-        {bigImg && 
-          <div className='fullscreen_img'>
-            <button onClick={closeFullscreen}>X</button>
-            <img src={bigImg} alt='fullscreen trip'/>
-          </div>
-        }
+            </div>
       </div>
       }
     </div>

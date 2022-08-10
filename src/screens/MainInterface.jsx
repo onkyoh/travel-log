@@ -27,6 +27,8 @@ const MainInterface = () => {
 
     const [markers, setMarkers] = useState([])
 
+    const [togglingAsides, setTogglingAsides] = useState(false)
+
     const currentUser = useContext(UserContext)
 
     const getMarkers = async () => {
@@ -38,12 +40,18 @@ const MainInterface = () => {
       getMarkers()
     }, [refreshMarkers])
   
-    const toggleContacts = () => {
-      setShowContacts(!showContacts)
+    const toggleAsides = () => {
+      setTogglingAsides(!togglingAsides)
+      setShowContacts(true)
+      setShowLogs(true)
     }
-    
-    const toggleLogs = () => {
-      setShowLogs(!showLogs)
+
+    const toggleVisibility = () => {
+      if (togglingAsides) {
+        setShowContacts(!showContacts)
+      } else {
+        setShowLogs(!showLogs)
+      }
     }
 
   return (
@@ -56,19 +64,23 @@ const MainInterface = () => {
         refreshMarkers={refreshMarkers} 
         markers={markers} setMarkers={setMarkers}/>
 
+      <div className='aside_container'>
+        {togglingAsides ? 
         <Contacts showContacts={showContacts}/>
-
+        :
         <LogType markerCoords={markerCoords} 
         position={position} setPosition={setPosition} 
         placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
         logId={logId} 
         refreshMarkers={refreshMarkers} setRefreshMarkers={setRefreshMarkers}
         showLogs={showLogs}/>
+        }
+      </div>
         
         <div className='util_buttons'>
-          <button onClick={toggleContacts}>O</button>
-          <div>trips</div>
-          <button onClick={toggleLogs}>N</button>
+          <div>trips select</div>
+          <button onClick={toggleAsides}>Switch</button>
+          <button onClick={toggleVisibility}>Hide</button>
         </div>
       </MarkerContext.Provider>
     </>
