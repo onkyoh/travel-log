@@ -3,13 +3,14 @@ import Contacts from '../components/Contacts'
 import Map from '../components/Map'
 import LogType from '../components/LogType'
 import { getDoc, doc } from 'firebase/firestore'
-import { db } from '../firebase-config'
+import { db, auth } from '../firebase-config'
+import { signOut } from "firebase/auth";
 import { UserContext } from '../App'
 
 
 export const MarkerContext = createContext()
 
-const MainInterface = () => {
+const MainInterface = ({setCurrentUser}) => {
 
     const [showContacts, setShowContacts] = useState(true)
 
@@ -54,9 +55,17 @@ const MainInterface = () => {
       }
     }
 
+    const logout = async () => {
+      await signOut(auth);
+      setCurrentUser('')
+  }
+
   return (
     <>  
       <MarkerContext.Provider value={markers}>
+
+      <button className='logout_button' onClick={logout}>LOGOUT</button>
+
         <Map 
         setMarkerCoords={setMarkerCoords} 
         position={position} setPosition={setPosition} 
@@ -64,7 +73,6 @@ const MainInterface = () => {
         refreshMarkers={refreshMarkers} 
         markers={markers} setMarkers={setMarkers}/>
 
-      <div className='aside_container'>
         {togglingAsides ? 
         <Contacts showContacts={showContacts}/>
         :
@@ -75,7 +83,6 @@ const MainInterface = () => {
         refreshMarkers={refreshMarkers} setRefreshMarkers={setRefreshMarkers}
         showLogs={showLogs}/>
         }
-      </div>
         
         <div className='util_buttons'>
           <div>trips select</div>

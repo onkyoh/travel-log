@@ -26,6 +26,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
   const [tripNames, setTripNames] = useState([])
   const [error, setError] = useState("")
   const errorRef = useRef("")
+  const [spinnerClassName, setSpinnerClassName] = useState('')
 
   const currentUser = useContext(UserContext)
   const markers = useContext(MarkerContext)
@@ -107,6 +108,9 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
     if (markerDetails.coordinates < 2) {
         error = 'Must include coordinates for marker.'
     }
+    if (markerDetails.date && markerDetails.date.length > 10) {
+      error = 'Date cannot be longer than 10 characters long.'
+    }
     if (!noTrip && selectValue === 'default') {
       error = 'Must add to an old trip or create a new trip.'
     }
@@ -144,11 +148,13 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
 
   const createNewMarker = async (e) => {
     e.preventDefault()
+    setSpinnerClassName(() => 'spinner')
     const validationError = logValidation()
 
     if (validationError) {
       setError(validationError)
       errorRef.current.scrollIntoView()
+      setSpinnerClassName('')
       return
     }
     
@@ -171,6 +177,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
       })
       setLogType("view")
       setPosition(null)
+      setSpinnerClassName('')
       return
     }
 
@@ -189,6 +196,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
       })
       setLogType("view")
       setPosition(null)
+      setSpinnerClassName('')
       return
     }
 
@@ -201,6 +209,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
       })
       setLogType("view")
       setPosition(null)
+      setSpinnerClassName('')
       return
     }
   }
@@ -218,7 +227,8 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
       {
       newMarker &&
         <form onSubmit={(e) => createNewMarker(e)}>
-          <span style={{color: 'red'}} ref={errorRef}>{error}</span>
+          <span className={spinnerClassName}></span>
+          <span style={{color: 'red', textAlign: 'center'}} ref={errorRef}>{error}</span>
           <div>
             <label htmlFor="place">Location</label>
             <input id="place" placeholder='Toronto, Canada' value={markerDetails.place  || ""} onChange={(e) => handleMarkerDetails(e, "place")}/>
@@ -246,15 +256,19 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
             <span style={{float: "right"}}>{markerDetails.desc.length || 0}/140</span>
           </div>
           <div>
-            {/* images */}
-            <input type="file" multiple onChange={(e) => handleMarkerDetails(e, "pics")}/>
+            <label htmlFor="pics">Pictures</label>
+            <input id='pics' type="file" multiple accept="image/*" onChange={(e) => handleMarkerDetails(e, "pics")}/>
           </div>
           <div className='trip_input'>
             <label htmlFor="trip_check">Was this part of a trip?</label>
             <input id="trip_check" type="checkbox" onChange={handleTripCheck}/>
           </div>
+
+        {/* Trip info Input area */}
+
           { !noTrip &&
           <div>
+            <div>
               <label htmlFor="trips">Which Trip?</label>
               <select name="trip_select" id="trip_select" value={selectValue} onChange={(e) => handleTripSelection(e)}>
                 <option value="default" disabled> -- select an option -- </option>
@@ -263,12 +277,13 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
                   <option key={trip.tripId} value={trip.tripName}>{trip.tripName}</option>
                 ))}
               </select>
+            </div>
               {selectValue === 'new' &&
-           <div>
-             <label htmlFor="trip_name">Create a name for this trip *</label>
-             <input type="text" placeholder='New Trip Name' id='trip_name' ref={tripNameRef}/>
-           </div>
-           }
+                <div>
+                  <label htmlFor="trip_name">Create a name for this trip *</label>
+                  <input type="text" placeholder='New Trip Name' id='trip_name' ref={tripNameRef}/>
+                </div>
+              }
           </div>
           }
           <button type='submit'>Create</button>

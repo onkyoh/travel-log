@@ -43,23 +43,16 @@ body {
   top: 0;
 }
 
-.aside_container {
-  border: 2px solid pink;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.aside_positioning {
   z-index: 1200;
   position: absolute;
   top: 50%;
-  right: 2em;
   -webkit-transform: translate(0, -50%);
           transform: translate(0, -50%);
+  right: 2em;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .contacts {
@@ -83,6 +76,12 @@ button {
   font-weight: 500;
   font-size: 1.2em;
   cursor: pointer;
+}
+
+.logout_button {
+  z-index: 1200;
+  position: absolute;
+  bottom: 0;
 }
 
 .img_button {
@@ -137,7 +136,7 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100%;
+  width: 302px;
 }
 
 .log_button_group button {
@@ -157,6 +156,58 @@ button {
   height: 60vh;
   background-color: #f1f1f1;
   overflow-y: auto;
+}
+
+@-webkit-keyframes spinning {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spinning {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  height: 100%;
+  width: 100%;
+  z-index: 1200;
+  position: absolute;
+  top: 0;
+  background-color: rgba(30, 30, 30, 0.7);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.spinner::after {
+  content: "";
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: none;
+  border: 5px solid;
+  border-color: white white white rgba(0, 0, 0, 0);
+  -webkit-animation: spinning 2s linear infinite;
+          animation: spinning 2s linear infinite;
 }
 
 .create_log > button {
@@ -405,7 +456,6 @@ button {
 
 .view_log .view_details p {
   padding: 0.5em;
-  font-family: "Permanent Marker", cursive;
   color: #1e1e1e;
 }
 
@@ -471,7 +521,7 @@ button {
 }
 
 .view_log .polaroid_grid .polaroid > div img {
-  max-height: 100%;
+  max-height: 110px;
   max-width: 100%;
 }
 
@@ -489,6 +539,26 @@ button {
   font-family: "Permanent Marker", cursive;
   font-size: 0.9em;
   color: black;
+}
+
+.delete_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  height: 80%;
+  padding: 0.5em;
+  gap: 1em;
 }
 
 .new_marker {
@@ -595,10 +665,10 @@ button {
 }
 
 @media screen and (max-width: 600px) {
-  .aside_container {
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+  .aside_positioning {
+    right: 50%;
+    -webkit-transform: translate(50%, -50%);
+            transform: translate(50%, -50%);
   }
   .util_buttons {
     left: 50%;

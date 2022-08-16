@@ -23,9 +23,9 @@ const ViewLog = ({currentMarker}) => {
           <div className='polaroid_grid'>
             {currentMarker.pics.length > 0 &&
                 currentMarker.pics.map((pic, i) => (
-                  <a className='polaroid' href={pic} target="_blank" rel="noreferrer">
+                  <a className='polaroid' key={pic} href={pic} target="_blank" rel="noreferrer">
                     <div>
-                      <img src={pic} alt='trip'/>
+                      <img src={pic} alt='trip' loading='eazy'/>
                     </div>
                     <span>{currentMarker.date || ""}</span>
                   </a>

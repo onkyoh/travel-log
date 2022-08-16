@@ -16,7 +16,6 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
         case 'create': logShown = <CreateLog position={position} setPosition={setPosition}
          placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
           setLogType={setLogType} setLogId={setLogId}/>; break;
-
         case 'view': logShown = <ViewLog currentMarker={currentMarker}/>; break;
         case 'edit': logShown = <EditLog currentMarker={currentMarker}/>; break;
     }
@@ -56,7 +55,7 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
     }, [logId])
 
   return (
-    <aside className='log_aside' style={showLogs ? {visibility: 'visible'} : {visibility: 'hidden'}}>  
+    <aside className='log_aside aside_positioning' style={showLogs ? {visibility: 'visible'} : {visibility: 'hidden'}}>  
       <div className='log_button_group'>
         <button onClick={() => handleLogType('view')} style={logType === 'view' ? activeTab : null}>View</button>
         <button onClick={() => handleLogType('create')} style={logType === 'create' ? activeTab : null}>Create</button>

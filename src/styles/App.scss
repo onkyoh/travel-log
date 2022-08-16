@@ -48,13 +48,12 @@ body {
     top: 0;
 }
 
-.aside_container {
-    border: 2px solid pink;
-    @include flexCenter();
+.aside_positioning {
     @include topLayer();
     top: 50%;
-    right: 2em;
     transform: translate(0, -50%);
+    right: 2em;
+    height: fit-content;
 }
 
 .contacts {
@@ -77,6 +76,11 @@ button {
     cursor: pointer;
 }
 
+.logout_button {
+    @include topLayer();
+    bottom: 0;
+}
+
 .img_button {
     width: 2em;
     height: 2em;
@@ -97,7 +101,7 @@ button {
 
 .log_button_group {
     @include flexCenter();
-    width: 100%;
+    width: 302px;
     button {
         width: 100%;
         border-radius: 0px;
@@ -115,6 +119,34 @@ button {
     height: 60vh;
     background-color: $background;
     overflow-y: auto;
+}
+
+@keyframes spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    height: 100%;
+    width: 100%;
+    @include topLayer();
+    top: 0;
+    background-color: rgba(30, 30, 30, 0.7);
+    @include flexCenter();
+    &::after {
+        content: "";
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: none;
+        border: 5px solid;
+        border-color: white white white rgba(0, 0, 0, 0);
+        animation: spinning 2s linear infinite;
+    }
 }
 
 .create_log {
@@ -281,7 +313,6 @@ button {
         }
         p {
             padding: 0.5em;
-            font-family: $marker-font;
             color: rgb(30, 30, 30);
         }
     }
@@ -310,7 +341,7 @@ button {
             @include flexCenter();
             background-color: rgb(30, 30, 30);
             img {
-                max-height: 100%;
+                max-height: 110px;
                 max-width: 100%;
             }
         }
@@ -325,6 +356,14 @@ button {
  }
 }
 
+.delete_form {
+    @include flexCenter();
+    flex-direction: column;
+    text-align: center;
+    height: 80%;
+    padding: 0.5em;
+    gap: 1em;
+}
 
 .new_marker {
     width: 50px;
@@ -391,9 +430,9 @@ button {
 }
 
 @media screen and (max-width: 600px) {
-    .aside_container {
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .aside_positioning {
+        right: 50%;
+        transform: translate(50%, -50%);
     }
     .util_buttons {
         left: 50%;

@@ -25,7 +25,7 @@ function App() {
     <div className='app'>
           {currentUser ? 
           <UserContext.Provider value={currentUser}>
-            <MainInterface/>
+            <MainInterface setCurrentUser={setCurrentUser}/>
           </UserContext.Provider>
           :
           <Login setCurrentUser={setCurrentUser}/>
