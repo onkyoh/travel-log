@@ -34,13 +34,54 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   z-index: 1200;
   position: absolute;
   width: 300px;
+  padding: 0.5em;
   right: 2em;
-  top: 0;
+  bottom: 0;
+  background-color: #f1f1f1;
+  border-radius: 15px 15px 0 0;
+  -webkit-box-shadow: 0px 0px 8px black;
+          box-shadow: 0px 0px 8px black;
+}
+
+.util_buttons button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 2em;
+  font-size: 1.1em;
+  padding: 0 0.5em;
+}
+
+.util_buttons button img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.util_buttons select {
+  width: 60%;
+  font-size: 1.1em;
+  height: 2em;
+  border: 2px solid #f33f90;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 0.5em;
+}
+
+.util_buttons select:focus {
+  -webkit-box-shadow: 0px 0px 4px black;
+          box-shadow: 0px 0px 4px black;
 }
 
 .aside_positioning {
@@ -76,12 +117,6 @@ button {
   font-weight: 500;
   font-size: 1.2em;
   cursor: pointer;
-}
-
-.logout_button {
-  z-index: 1200;
-  position: absolute;
-  bottom: 0;
 }
 
 .img_button {
@@ -541,6 +576,99 @@ button {
   color: black;
 }
 
+.edit_buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 1em;
+}
+
+.edit_buttons * {
+  width: 30%;
+}
+
+.check_divs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5em;
+}
+
+.check_divs input[type="file"] {
+  margin-top: 1em;
+}
+
+.check_divs p {
+  padding-top: 0.5em;
+}
+
+.check_divs .pic_grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 1em;
+}
+
+.check_divs .pic_grid div {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0;
+  outline: 2px solid #f33f90;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.check_divs .pic_grid div img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.check_divs .pic_grid .selected_overlay {
+  position: relative;
+}
+
+.check_divs .pic_grid .selected_overlay::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #f33f90;
+  opacity: 0.7;
+}
+
 .delete_form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -559,6 +687,32 @@ button {
   height: 80%;
   padding: 0.5em;
   gap: 1em;
+}
+
+.delete_form input[type="checkbox"] {
+  height: 2em;
+  width: 2em;
+  background-color: #f33f90;
+  position: relative;
+}
+
+.delete_form input[type="checkbox"]:checked::after {
+  content: '\2713';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #f33f90;
+  color: white;
+  font-size: 1.3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .new_marker {

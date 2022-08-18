@@ -5,7 +5,7 @@ const ViewLog = ({currentMarker}) => {
   return (
     <div className='log_container'>
       {!currentMarker ? 
-      <p>Please selects a marker to view.</p> 
+      <p>Please select a marker to view.</p> 
       :
       <div className='log_container view_log'>
           <div className='view_details'>
