@@ -4,7 +4,7 @@ import Leaflet from 'leaflet'
 import CreateMarker from './CreateMarker'
 import { MarkerContext } from '../screens/MainInterface'
 
-const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers}) => {
+const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers, setShowLogs}) => {
 
   const markers = useContext(MarkerContext)
 
@@ -16,6 +16,7 @@ const Map = ({position, setPosition, placingMarker, setLogId, refreshMarkers}) =
   const openLog = (id) => {
     //triggers useEffect in viewLog to query through markers and get details for marker with id = logId
     setLogId(id)
+    setShowLogs(true)
   }
   
   return (

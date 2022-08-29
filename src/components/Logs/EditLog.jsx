@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import { db } from '../../firebase-config'
 import { storage } from '../../firebase-config';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { getDoc, updateDoc, doc } from 'firebase/firestore'
 import { v4 as uuidv4 } from 'uuid';
+import { MarkerContext } from '../../screens/MainInterface';
+import { UserContext } from '../../App';
 
-const EditLog = ({currentMarker}) => {
+const EditLog = ({currentMarker, setRefreshMarkers, setLogType}) => {
 
   const [editing, setEditing] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -16,6 +18,9 @@ const EditLog = ({currentMarker}) => {
   })
   const [selectedPics, setSelectedPics] = useState([])
 
+  const markers = useContext(MarkerContext)
+  const currentUser = useContext(UserContext)
+
   const startEdit = () => {
     setEditing(true)
   }
@@ -24,12 +29,35 @@ const EditLog = ({currentMarker}) => {
     setDeleting(true)
   }
 
-  const submitEdit = (e) => {
-    e.preventDefault()
+  const deleteImages = (imgArray) => {
+    imgArray.forEach((pic) => {
+      const imageName = pic.substring(pic.indexOf('/o/') + 3, pic.indexOf('?alt'))
+      const imageRef = ref(storage, `${imageName}`)
+      deleteObject(imageRef).then(() => {
+        console.log(imageName, ' was deleted.')
+      }).catch((e) => {
+        console.log(e.message)
+      })
+    })
   }
 
-  const submitDelete = (e) => {
+  const deleteMarker = async () => {
+    let newMarkers = [...markers]
+    const idx = newMarkers.findIndex(marker => marker.id === currentMarker.id)
+    newMarkers.splice(idx, 1)
+    await updateDoc((doc(db, 'users', currentUser)), {
+      markers: newMarkers
+    })
+  }
+
+  //deletes marker and images in storage
+
+  const submitDelete = async (e) => {
     e.preventDefault()
+    await deleteImages(currentMarker.pics)
+    await deleteMarker()
+    setRefreshMarkers(prev => prev + 1)
+    setLogType("view")
   }
 
   const handleEdits = (e, field) => {
@@ -44,6 +72,8 @@ const EditLog = ({currentMarker}) => {
     setCheckboxRefs({...checkboxRefs, remove: !checkboxRefs.remove})
   }
   
+//add pics to selected array which gets passed to deletePics function on edit submission
+
   const selectPics = (pic) => {
     const idx = selectedPics.indexOf(pic)
     let tempSelected = [...selectedPics]
@@ -58,7 +88,7 @@ const EditLog = ({currentMarker}) => {
 
   const uploadPics = async () => {
     let picArray = [...editedMarker.pics]
-
+    console.log('selected files', picArray)
     const fetchMap = async () => {
         return Promise.all(picArray.map(async(pic, i) => {
         const imageRef = ref(storage, `/${uuidv4()}`)
@@ -73,17 +103,53 @@ const EditLog = ({currentMarker}) => {
     return fetchMap()
   }
 
-  const removePics = async () => {
-    
+  const deletePicUrls = () => {
+    let tempPics = editedMarker.pics
+    tempPics = tempPics.filter(url => !selectedPics.includes(url))
+    return tempPics
+  }
+
+  const submitEdit = async (e) => {
+    e.preventDefault()
+    console.log('submitting edit')
+    let tempMarker = {...editedMarker}
+    let picsToUpload = editedMarker.pics
+    tempMarker.pics = []
+
+    //if selected pics for removal
+    if (selectedPics.length > 0) {
+      await deleteImages(selectedPics)
+      tempMarker.pics = deletePicUrls()
+    }
+    //if selected pics for upload
+    if (editedMarker.pics.length > 0) {
+      // const imageUrls = await uploadPics()
+      // tempMarker.pics = imageUrls
+      console.log('pics uploaded')
+      // tempMarker.pics = [...tempMarker.pics, ...imageUrls]
+    }  
+
+    //replacing marker with edited 1
+    let newMarkers = [...markers]
+    const idx = newMarkers.findIndex(marker => marker.id === tempMarker.id)
+    if (idx > -1) {
+      newMarkers[idx] = tempMarker
+      await updateDoc((doc(db, 'users', currentUser)), {
+        markers: [...newMarkers]
+      })
+    }
+    //clean up after edit
+    setRefreshMarkers(prev => prev + 1)
+    setLogType('view')
   }
 
   useEffect(() => {
     setEditedMarker({...currentMarker})
-  }, [])
+  }, [currentMarker])
 
   return (
     <div className='log_container'>
-      {!editedMarker ? 
+      {!currentMarker ? 
         <p>Please select a marker to edit.</p>
         :
         <>
@@ -118,7 +184,7 @@ const EditLog = ({currentMarker}) => {
             <input type="file" multiple accept="image/*" onChange={(e) => handleEdits(e, "pics")}/>
             }
           </div>
-          {editedMarker.pics.length > 0 &&
+          {editedMarker.pics &&
             <div className='check_divs'>
               <label>Remove Pictures?</label>
               <input type="checkbox" value={checkboxRefs.remove} onChange={changeRemove}/>
@@ -127,8 +193,10 @@ const EditLog = ({currentMarker}) => {
                   <p>Select pictures to be removed.</p>
                     <div className='pic_grid'>
                       {editedMarker.pics.map((pic) => (
-                        <div key={pic} onClick={() => selectPics(pic)} className={selectedPics.includes(pic) ? "selected_overlay" : ""}>
-                          <img src={pic} alt='uploaded user picture'/>
+                        <div key={pic} onClick={() => selectPics(pic)} 
+                        className={selectedPics.includes(pic) ? "selected_overlay" : ""}
+                        style={{cursor: 'pointer', userSelect: 'none'}}>
+                          <img src={pic} alt='trip memories'/>
                         </div>
                       ))}
                     </div>
@@ -140,6 +208,7 @@ const EditLog = ({currentMarker}) => {
             <label>Add to a Trip?</label>
             <input type="checkbox" />
           </div>
+          <button type='submit'>Submit</button>
         </form>
       </div>
       }

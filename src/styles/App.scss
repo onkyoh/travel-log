@@ -43,6 +43,7 @@ body {
     @include flexCenter();
     justify-content: space-between;
     @include topLayer();
+    position: fixed;
     width: 300px;
     padding: 0.5em;
     right: 2em;
@@ -123,7 +124,7 @@ button {
 
 .log_button_group {
     @include flexCenter();
-    width: 302px;
+    width: 300px;
     button {
         width: 100%;
         border-radius: 0px;
@@ -157,6 +158,7 @@ button {
     width: 100%;
     @include topLayer();
     top: 0;
+    left: 0;
     background-color: rgba(30, 30, 30, 0.7);
     @include flexCenter();
     &::after {
@@ -406,7 +408,7 @@ button {
         gap: 1em;
         div {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 1/1;
             @include flexCenter();
             padding: 0;
             outline: 2px solid $main-pink;
@@ -472,6 +474,26 @@ button {
     box-shadow: 0px 0px 8px black;
     border-radius: 50%;
     background-color: $main-pink
+}
+
+.logout_modal {
+    width: 300px;
+    height: 10 0px;
+    @include topLayer();
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 100vmax 100vmax rgba(30, 30, 30, 0.7);
+    background-color: $background;
+    @include flexCenter();
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: 800;
+    
 }
 
 .login {

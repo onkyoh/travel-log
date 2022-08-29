@@ -4,7 +4,12 @@ import EditLog from './Logs/EditLog';
 import ViewLog from './Logs/ViewLog';
 import { MarkerContext } from '../screens/MainInterface';
 
-const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId, setLogId, refreshMarkers, setRefreshMarkers, showLogs}) => {
+const LogType = 
+({
+  position, setPosition,
+  placingMarker, setPlacingMarker,logId,
+   setLogId, setRefreshMarkers, showLogs
+}) => {
 
     const [logType, setLogType] = useState("create")
     const [currentMarker, setCurrentMarker] = useState()
@@ -15,9 +20,10 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
     switch (logType) {
         case 'create': logShown = <CreateLog position={position} setPosition={setPosition}
          placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
-          setLogType={setLogType} setLogId={setLogId}/>; break;
+          setLogType={setLogType} setLogId={setLogId} setRefreshMarkers={setRefreshMarkers}/>; break;
         case 'view': logShown = <ViewLog currentMarker={currentMarker}/>; break;
-        case 'edit': logShown = <EditLog currentMarker={currentMarker}/>; break;
+        case 'edit': logShown = <EditLog currentMarker={currentMarker} 
+        setRefreshMarkers={setRefreshMarkers} setLogType={setLogType}/>; break;
     }
 
     const handleLogType = (type) => {
@@ -33,9 +39,6 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
       if (placingMarker) {
         setPlacingMarker(false)
       }
-      if (logType === 'view') {
-        setRefreshMarkers(refreshMarkers + 1)
-      } 
     }, [logType])
 
     const getLogData = () => {
@@ -51,6 +54,8 @@ const LogType = ({position, setPosition, placingMarker, setPlacingMarker, logId,
     useEffect(() => {
       if (logId) {
         getLogData()
+      } else {
+        setCurrentMarker()
       }
     }, [logId])
 

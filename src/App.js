@@ -11,25 +11,34 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState("")
 
-  useEffect(() => {
+  const [loadingUser, setLoadingUser] = useState(true)
+
     onAuthStateChanged (auth, (retrievedUser) => {
       if (retrievedUser) {
-        setCurrentUser(retrievedUser.uid)
+        setCurrentUser(() => retrievedUser.uid)
       } else {
        console.log("No previous user found") 
       }
+      setLoadingUser(false)
     })
-  }, [])
 
   return (
     <div className='app'>
+      {loadingUser ?
+        <>
+          <div className='spinner'></div>
+        </>
+      :
+        <>
           {currentUser ? 
-          <UserContext.Provider value={currentUser}>
-            <MainInterface setCurrentUser={setCurrentUser}/>
-          </UserContext.Provider>
-          :
-          <Login setCurrentUser={setCurrentUser}/>
+            <UserContext.Provider value={currentUser}>
+              <MainInterface setCurrentUser={setCurrentUser}/>
+            </UserContext.Provider>
+            :
+            <Login setCurrentUser={setCurrentUser}/>
           }
+        </>
+      }
     </div>
   );
 }

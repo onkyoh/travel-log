@@ -1,7 +1,7 @@
 import React, {useState, createContext, useEffect, useContext} from 'react'
 import Map from '../components/Map'
 import LogType from '../components/LogType'
-import { getDoc, doc } from 'firebase/firestore'
+import { getDoc, doc, updateDoc } from 'firebase/firestore'
 import { db, auth } from '../firebase-config'
 import { signOut } from "firebase/auth";
 import { UserContext } from '../App'
@@ -30,16 +30,39 @@ const MainInterface = ({setCurrentUser}) => {
 
     const [trips, setTrips] = useState([])
 
+    const [showLogout, setShowLogout] = useState(false)
+
     const currentUser = useContext(UserContext)
+
+    const checkTrips = async (trips, markers) => {
+      for (let i = trips.length - 1; i > -1; i--) {
+        const currentTrip = trips[i]
+        const idx = markers.findIndex(marker => marker?.tripId === currentTrip.tripId)
+          if (idx > -1) {
+            console.log('marker exists for trip')
+          } else {
+            console.log('marker does not exist for this trip')
+            trips.splice(i, 1)
+          }
+      }
+      setTrips([...trips])
+      await updateDoc((doc(db, 'users', currentUser)), {
+        trips: [...trips]
+      })
+    }
 
     const getUserData = async () => {
       const userData = await getDoc(doc(db, 'users', currentUser))
       setMarkers([...userData.data().markers])
-      setTrips([...userData.data().trips])
+      const tempMarkers = [...userData.data().markers]
+      const tempTrips = [...userData.data().trips]
+      checkTrips(tempTrips, tempMarkers)
     }
 
     useEffect(() => {
       getUserData()
+      setLogId()
+      console.log('refreshed')
     }, [refreshMarkers])
   
 
@@ -52,6 +75,10 @@ const MainInterface = ({setCurrentUser}) => {
       setCurrentUser('')
   }
 
+  const openLogout = () => {
+    setShowLogout(true)
+  }
+
   return (
     <>  
       <MarkerContext.Provider value={markers}>
@@ -61,13 +88,12 @@ const MainInterface = ({setCurrentUser}) => {
         position={position} setPosition={setPosition} 
         placingMarker={placingMarker} setLogId={setLogId}
         refreshMarkers={refreshMarkers} 
-        markers={markers} setMarkers={setMarkers}/>
+        markers={markers} setMarkers={setMarkers} setShowLogs={setShowLogs}/>
 
         <LogType markerCoords={markerCoords} 
         position={position} setPosition={setPosition} 
         placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
-        logId={logId} 
-        refreshMarkers={refreshMarkers} setRefreshMarkers={setRefreshMarkers}
+        logId={logId} setRefreshMarkers={setRefreshMarkers}
         showLogs={showLogs}/>
         
         
@@ -75,12 +101,19 @@ const MainInterface = ({setCurrentUser}) => {
           <select name="trips">
             <option value="'all">All</option>
             {trips.map(trip => (
-              <option value={trip.tripId}>{trip.tripName}</option>
+              <option key={trip.tripId} value={trip.tripId}>{trip.tripName}</option>
             ))}
           </select>
           <button onClick={toggleVisibility}><img src={showLogs ? show : hide} alt="show/hide"/></button>
-          <button onClick={logout}><img src={door} alt="logout" /></button>
+          <button onClick={openLogout}><img src={door} alt="logout" /></button>
         </div>
+
+        {showLogout && 
+        <div className='logout_modal'>
+          <p>Are you sure you want to logout?</p>
+          <button onClick={logout}>Logout</button>
+        </div>
+      }
       </MarkerContext.Provider>
     </>
   )

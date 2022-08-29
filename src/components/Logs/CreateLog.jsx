@@ -1,14 +1,14 @@
+import React, {useState, useRef, useEffect, useContext} from 'react'
 import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { storage } from '../../firebase-config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import React, {useState, useRef, useEffect, useContext} from 'react'
-import {UserContext} from '../../App'
+import { UserContext } from '../../App'
 import { MarkerContext } from '../../screens/MainInterface'
 import { v4 as uuidv4 } from 'uuid';
 
 
-const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setLogType}) => {
+const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setLogType, setRefreshMarkers}) => {
 
   const detailsDefault = {
     place: "",
@@ -80,11 +80,10 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
 
   const fetchTripNames = async () => {
     const fetchedTrips = await getDoc(doc(db, 'users', currentUser))
-    const tempTripNames = fetchedTrips.data()
-    if (tempTripNames.trips.length !== 0) {
-      setTripNames([...tempTripNames.trips])
+    const tempTripNames = fetchedTrips.data().trips
+    if (tempTripNames.length > 0) {
+      setTripNames([...tempTripNames])
     }
-      console.log(tempTripNames)
   }
 
   const handleTripCheck = () => {
@@ -176,6 +175,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
         markers: [...markers, tempMarker]
       })
       setLogType("view")
+      setRefreshMarkers(prev => prev + 1)
       setPosition(null)
       setSpinnerClassName('')
       return
@@ -195,6 +195,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
         trips: [...tripNames, tempTrip]
       })
       setLogType("view")
+      setRefreshMarkers(prev => prev + 1)
       setPosition(null)
       setSpinnerClassName('')
       return
@@ -208,6 +209,7 @@ const CreateLog = ({position, setPosition, placingMarker, setPlacingMarker, setL
         markers: [...markers, tempMarker]
       })
       setLogType("view")
+      setRefreshMarkers(prev => prev + 1)
       setPosition(null)
       setSpinnerClassName('')
       return

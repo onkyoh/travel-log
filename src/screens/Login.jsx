@@ -12,7 +12,7 @@ const Login = ({setCurrentUser}) => {
     const [registerPassword, setRegisterPassword] = useState("")
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
-    const [needAccount, setNeedAccount] = useState(true)
+    const [needAccount, setNeedAccount] = useState(false)
     const [error, setError] = useState("")
 
     const register = async (e) => {
