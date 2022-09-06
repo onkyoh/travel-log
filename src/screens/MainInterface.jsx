@@ -32,6 +32,8 @@ const MainInterface = ({setCurrentUser}) => {
 
     const [showLogout, setShowLogout] = useState(false)
 
+    const [currentTrip, setCurrentTrip] = useState()
+
     const currentUser = useContext(UserContext)
 
     const checkTrips = async (trips, markers) => {
@@ -62,7 +64,6 @@ const MainInterface = ({setCurrentUser}) => {
     useEffect(() => {
       getUserData()
       setLogId()
-      console.log('refreshed')
     }, [refreshMarkers])
   
 
@@ -75,8 +76,17 @@ const MainInterface = ({setCurrentUser}) => {
       setCurrentUser('')
   }
 
-  const openLogout = () => {
-    setShowLogout(true)
+  const toggleLogout = () => {
+    setShowLogout(!showLogout)
+  }
+
+  const handleCurrentTrip = (e) => {
+    if (e.target.value === 'all') {
+      setCurrentTrip()
+      return
+    }
+    let selectedTrip = trips.filter(trip => trip.tripId === e.target.value)
+    setCurrentTrip(selectedTrip)
   }
 
   return (
@@ -86,30 +96,32 @@ const MainInterface = ({setCurrentUser}) => {
         <Map 
         setMarkerCoords={setMarkerCoords} 
         position={position} setPosition={setPosition} 
-        placingMarker={placingMarker} setLogId={setLogId}
+        placingMarker={placingMarker} 
+        logId={logId} setLogId={setLogId}
         refreshMarkers={refreshMarkers} 
-        markers={markers} setMarkers={setMarkers} setShowLogs={setShowLogs}/>
+        markers={markers} setMarkers={setMarkers} setShowLogs={setShowLogs} currentTrip={currentTrip}/>
 
         <LogType markerCoords={markerCoords} 
         position={position} setPosition={setPosition} 
         placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
-        logId={logId} setRefreshMarkers={setRefreshMarkers}
+        logId={logId} setLogId={setLogId} setRefreshMarkers={setRefreshMarkers}
         showLogs={showLogs}/>
         
         
         <div className='util_buttons'>
-          <select name="trips">
-            <option value="'all">All</option>
+          <select name="trips" onChange={(e) => handleCurrentTrip(e)}>
+            <option value="all">All</option>
             {trips.map(trip => (
               <option key={trip.tripId} value={trip.tripId}>{trip.tripName}</option>
             ))}
           </select>
           <button onClick={toggleVisibility}><img src={showLogs ? show : hide} alt="show/hide"/></button>
-          <button onClick={openLogout}><img src={door} alt="logout" /></button>
+          <button onClick={toggleLogout}><img src={door} alt="logout" /></button>
         </div>
 
         {showLogout && 
         <div className='logout_modal'>
+          <button onClick={toggleLogout}>x</button>
           <p>Are you sure you want to logout?</p>
           <button onClick={logout}>Logout</button>
         </div>

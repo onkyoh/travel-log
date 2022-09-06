@@ -5,19 +5,16 @@ const ViewLog = ({currentMarker}) => {
   return (
     <div className='log_container'>
       {!currentMarker ? 
-      <p>Please select a marker to view.</p> 
+      <p className='view_dialog'>
+        Please selects a marker to view.
+      </p> 
       :
       <div className='log_container view_log'>
           <div className='view_details'>
-            <h5>Where?</h5>
             <p>
-            {currentMarker.place || ""}
-            {currentMarker.place ? <br/> : ""}
-            {currentMarker.coordinates[0].toFixed(3) + ' , '+ currentMarker.coordinates[1].toFixed(3)}
+              <h5>{currentMarker.place || ""}</h5>
+              <span>{currentMarker.coordinates[0].toFixed(2)}&deg;N, {currentMarker.coordinates[1].toFixed(2)}&deg;E</span>
             </p>
-          </div>
-          <div className='view_details'>
-            <h5>What?</h5>
             <p>{currentMarker.desc}</p>
           </div>
           <div className='polaroid_grid'>

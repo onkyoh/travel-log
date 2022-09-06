@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import CreateLog from './Logs/CreateLog'
-import EditLog from './Logs/EditLog';
 import ViewLog from './Logs/ViewLog';
 import { MarkerContext } from '../screens/MainInterface';
 
@@ -22,8 +21,6 @@ const LogType =
          placingMarker={placingMarker} setPlacingMarker={setPlacingMarker}
           setLogType={setLogType} setLogId={setLogId} setRefreshMarkers={setRefreshMarkers}/>; break;
         case 'view': logShown = <ViewLog currentMarker={currentMarker}/>; break;
-        case 'edit': logShown = <EditLog currentMarker={currentMarker} 
-        setRefreshMarkers={setRefreshMarkers} setLogType={setLogType}/>; break;
     }
 
     const handleLogType = (type) => {
@@ -39,6 +36,7 @@ const LogType =
       if (placingMarker) {
         setPlacingMarker(false)
       }
+      setLogId('')
     }, [logType])
 
     const getLogData = () => {
@@ -48,7 +46,6 @@ const LogType =
         return
       }
       setCurrentMarker(markers[idx])
-      console.log(markers[idx])
     }
   
     useEffect(() => {
@@ -64,7 +61,6 @@ const LogType =
       <div className='log_button_group'>
         <button onClick={() => handleLogType('view')} style={logType === 'view' ? activeTab : null}>View</button>
         <button onClick={() => handleLogType('create')} style={logType === 'create' ? activeTab : null}>Create</button>
-        <button onClick={() => handleLogType('edit')} style={logType === 'edit' ? activeTab : null}>Edit</button>
       </div>
       {logShown}
     </aside>
