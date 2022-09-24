@@ -31,11 +31,12 @@ const Map = ({position, setPosition, placingMarker, logId, setLogId, refreshMark
     if (currentTrip) {
       let tempTripMarkers = markers.filter(marker => marker.tripId === currentTrip[0].tripId)
       setTripMarkers([...tempTripMarkers])
+
     }
     else {
       setTripMarkers([...markers])
     }
-  }, [currentTrip])
+  }, [currentTrip, markers])
   
   return (
     <MapContainer className='map' center={[49, -80]} zoom={4} minZoom={2} maxBounds={[[-90,-180],   [90,180]] } zoomControl={false}>
@@ -43,7 +44,7 @@ const Map = ({position, setPosition, placingMarker, logId, setLogId, refreshMark
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-          {markers && tripMarkers.map((marker) => (
+          {tripMarkers && tripMarkers.map((marker) => (
             <Marker key={marker.id} position={marker.coordinates} icon={marker.id === logId ? currentIcons : markerIcons} eventHandlers={{
               click: () => openLog(marker.id),
             }}/>

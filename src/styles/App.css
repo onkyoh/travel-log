@@ -1,10 +1,10 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:wght@300&display=swap");
 * {
   padding: 0;
   margin: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -19,24 +19,17 @@ body {
   height: 100%;
 }
 
-.app, .map {
+.app,
+.map {
   width: 100%;
   height: 100%;
 }
 
 .util_buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   z-index: 1200;
   position: absolute;
   position: fixed;
@@ -46,30 +39,20 @@ body {
   bottom: 0;
   background-color: #f1f1f1;
   border-radius: 15px 15px 0 0;
-  -webkit-box-shadow: 0px 0px 8px black;
-          box-shadow: 0px 0px 8px black;
+  box-shadow: 0px 0px 8px black;
 }
-
 .util_buttons button {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   height: 2em;
   font-size: 1.1em;
   padding: 0 0.5em;
 }
-
 .util_buttons button img {
   width: 1.5em;
   height: 1.5em;
 }
-
 .util_buttons select {
   width: 60%;
   font-size: 1.1em;
@@ -79,18 +62,15 @@ body {
   outline: none;
   padding-left: 0.5em;
 }
-
 .util_buttons select:focus {
-  -webkit-box-shadow: 0px 0px 4px black;
-          box-shadow: 0px 0px 4px black;
+  box-shadow: 0px 0px 4px black;
 }
 
 .aside_positioning {
   z-index: 1200;
   position: absolute;
   top: 50%;
-  -webkit-transform: translate(0, -50%);
-          transform: translate(0, -50%);
+  transform: translate(0, -50%);
   right: 2em;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -101,8 +81,7 @@ body {
   width: 300px;
   height: 80%;
   background-color: #f1f1f1;
-  -webkit-box-shadow: 0px 0px 16px black;
-          box-shadow: 0px 0px 16px black;
+  box-shadow: 0px 0px 16px black;
 }
 
 button {
@@ -123,58 +102,33 @@ button {
 .img_button {
   width: 2em;
   height: 2em;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
-
 .img_button img {
   height: 100%;
-  -webkit-filter: grayscale(1) brightness(3);
-          filter: grayscale(1) brightness(3);
+  filter: grayscale(1) brightness(3);
 }
 
 .log_aside {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 300px;
-  -webkit-box-shadow: 0px 0px 16px black;
-          box-shadow: 0px 0px 16px black;
+  box-shadow: 0px 0px 16px black;
 }
 
 .log_button_group {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   width: 300px;
 }
-
 .log_button_group button {
   width: 100%;
   border-radius: 0px;
@@ -182,7 +136,6 @@ button {
   color: #f33f90;
   border: 1px solid #f33f90;
 }
-
 .log_button_group button:nth-of-type(1), .log_button_group button:nth-of-type(2) {
   border-right: none;
 }
@@ -193,7 +146,6 @@ button {
   background-color: #f1f1f1;
   overflow-y: auto;
 }
-
 .log_container .view_dialog {
   text-align: center;
   padding-top: 3em;
@@ -201,26 +153,21 @@ button {
 
 @-webkit-keyframes spinning {
   from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes spinning {
   from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
-
 .spinner {
   height: 100%;
   width: 100%;
@@ -229,17 +176,10 @@ button {
   top: 0;
   left: 0;
   background-color: rgba(30, 30, 30, 0.7);
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
-
 .spinner::after {
   content: "";
   height: 50px;
@@ -256,24 +196,13 @@ button {
   position: relative;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-
 .create_log form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -282,20 +211,17 @@ button {
   padding: 1em 0;
   background-color: #f1f1f1;
 }
-
 .create_log form div {
   width: 90%;
   text-align: center;
   padding-bottom: 1em;
 }
-
 .create_log form div label {
   display: block;
   text-align: start;
   width: 100%;
   padding-bottom: 0.5em;
 }
-
 .create_log form div input {
   width: 90%;
   font-size: 1.1em;
@@ -305,30 +231,21 @@ button {
   padding: 0.25em 0;
   padding-left: 0.5em;
 }
-
 .create_log form div input:focus {
   outline: #f33f90 2px solid;
 }
-
-.create_log form div input[type='checkbox'] {
+.create_log form div input[type=checkbox] {
   width: auto;
   position: relative;
   width: 1em;
   height: 1em;
 }
-
-.create_log form div input[type='checkbox']::after {
+.create_log form div input[type=checkbox]::after {
   position: absolute;
   content: "Yes";
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   color: #f33f90;
   width: 2em;
@@ -337,17 +254,14 @@ button {
   border-radius: 5px;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   cursor: pointer;
 }
-
-.create_log form div input[type='checkbox']:checked::after {
-  content: '\2713';
+.create_log form div input[type=checkbox]:checked::after {
+  content: "✓";
   background-color: #f33f90;
   color: white;
 }
-
 .create_log form div textarea {
   width: 90%;
   height: 100px;
@@ -357,11 +271,9 @@ button {
   border-radius: 5px;
   padding-left: 0.5em;
 }
-
 .create_log form div textarea:focus {
   outline: #f33f90 2px solid;
 }
-
 .create_log form div select {
   width: 90%;
   height: 2em;
@@ -369,65 +281,43 @@ button {
   border-radius: 5px;
   font-size: 1.1em;
 }
-
 .create_log form div select option {
   text-overflow: ellipsis;
 }
-
 .create_log form div select:focus {
   border: 2px solid #f33f90;
   outline: none;
 }
-
 .create_log form div .marker_input {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   width: 90%;
   margin: auto;
   padding: 0;
 }
-
 .create_log form div .marker_input button {
   height: 1.75em;
 }
-
-.create_log form div .marker_input input[type='checkbox'] {
+.create_log form div .marker_input input[type=checkbox] {
   width: 3em;
   height: 1.5em;
 }
-
-.create_log form div .marker_input input[type='checkbox']::after {
+.create_log form div .marker_input input[type=checkbox]::after {
   content: "Set";
   width: 3em;
   height: 1.75em;
   font-size: 1em;
   padding: 0 0.1em;
 }
-
-.create_log form div .marker_input input[type='checkbox']:checked::after {
+.create_log form div .marker_input input[type=checkbox]:checked::after {
   content: "Setting";
 }
-
 .create_log form div .marker_input span {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   border: 1px solid #f33f90;
   height: 2em;
@@ -435,240 +325,146 @@ button {
   font-size: 1em;
   background-color: white;
 }
-
 .create_log form div div {
   width: 100%;
 }
-
 .create_log form .date_input {
   width: 90%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
   margin: auto;
   padding: 0;
 }
-
 .create_log form .date_input button {
   height: 2em;
   font-size: 1em;
 }
-
 .create_log form .trip_input label {
   padding-bottom: 1em;
 }
 
 .view_log {
   width: 300px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
   background-color: #f1f1f1;
 }
-
 .view_log .view_details {
   width: 95%;
   padding-bottom: 1em;
   text-align: center;
 }
-
 .view_log .view_details h5 {
   font-size: 1.3em;
   font-family: "Permanent Marker", cursive;
   padding-bottom: 0.5em;
 }
-
 .view_log .view_details p {
   padding: 0.5em;
-  color: #1e1e1e;
+  color: rgb(30, 30, 30);
 }
-
 .view_log .polaroid_grid {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
   row-gap: 1.5em;
   padding: 0.5em;
   width: 100%;
 }
-
 .view_log .polaroid_grid .polaroid {
-  height: calc( 110px + 1.75em);
+  height: calc(110px + 1.75em);
   width: 110px;
   border: 3px solid white;
   border-bottom: none;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  box-sizing: content-box;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: white;
-  -webkit-box-shadow: 0px 0px 4px black;
-          box-shadow: 0px 0px 4px black;
+  box-shadow: 0px 0px 4px black;
   text-decoration: none;
   cursor: pointer;
 }
-
 .view_log .polaroid_grid .polaroid > div {
   height: 110px;
   width: 110px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #1e1e1e;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(30, 30, 30);
 }
-
 .view_log .polaroid_grid .polaroid > div img {
   max-height: 110px;
   max-width: 100%;
 }
-
 .view_log .polaroid_grid .polaroid span {
   height: 1.75em;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   font-family: "Permanent Marker", cursive;
   font-size: 0.9em;
   color: black;
 }
 
 .edit_buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   gap: 1em;
 }
-
 .edit_buttons * {
   width: 30%;
 }
 
 .check_divs {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   gap: 0.5em;
 }
-
-.check_divs input[type="file"] {
+.check_divs input[type=file] {
   margin-top: 1em;
 }
-
 .check_divs p {
   padding-top: 0.5em;
 }
-
 .check_divs .pic_grid {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   gap: 1em;
 }
-
 .check_divs .pic_grid div {
   width: 100%;
   aspect-ratio: 1/1;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   outline: 2px solid #f33f90;
   border-radius: 15px;
   overflow: hidden;
 }
-
 .check_divs .pic_grid div img {
   max-width: 100%;
   max-height: 100%;
 }
-
 .check_divs .pic_grid .selected_overlay {
   position: relative;
 }
-
 .check_divs .pic_grid .selected_overlay::after {
   content: "";
   position: absolute;
@@ -679,65 +475,46 @@ button {
 }
 
 .delete_form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
   height: 80%;
   padding: 0.5em;
   gap: 1em;
 }
-
-.delete_form input[type="checkbox"] {
+.delete_form input[type=checkbox] {
   height: 2em;
   width: 2em;
   background-color: #f33f90;
   position: relative;
 }
-
-.delete_form input[type="checkbox"]:checked::after {
-  content: '\2713';
+.delete_form input[type=checkbox]:checked::after {
+  content: "✓";
   position: absolute;
   height: 100%;
   width: 100%;
   background-color: #f33f90;
   color: white;
   font-size: 1.3em;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .new_marker {
   width: 50px;
   height: 50px;
   background-color: #f1f1f1;
-  -webkit-box-shadow: 0px 0px 8px black;
-          box-shadow: 0px 0px 8px black;
+  box-shadow: 0px 0px 8px black;
   border-radius: 50%;
 }
 
 .trip_marker {
   width: 50px;
   height: 50px;
-  -webkit-box-shadow: 0px 0px 8px black;
-          box-shadow: 0px 0px 8px black;
+  box-shadow: 0px 0px 8px black;
   border-radius: 50%;
   background-color: #f33f90;
 }
@@ -745,8 +522,7 @@ button {
 .current_marker {
   width: 50px;
   height: 50px;
-  -webkit-box-shadow: 0px 0px 8px black;
-          box-shadow: 0px 0px 8px black;
+  box-shadow: 0px 0px 8px black;
   border-radius: 50%;
   background-color: white;
   border: 2px solid #f33f90;
@@ -759,34 +535,21 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0 100vmax 100vmax rgba(30, 30, 30, 0.7);
-          box-shadow: 0 0 100vmax 100vmax rgba(30, 30, 30, 0.7);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 100vmax 100vmax rgba(30, 30, 30, 0.7);
   background-color: #f1f1f1;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-around;
   text-align: center;
   padding: 0.5em;
   border-radius: 15px;
   font-size: 1.1em;
   font-weight: 800;
 }
-
 .logout_modal button:first-of-type {
   margin-left: auto;
   padding: 0.5em;
@@ -795,72 +558,44 @@ button {
 }
 
 .login {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
-
 .login .form_container {
-  width: calc(min(95%, 400px));
+  width: min(95%, 400px);
   padding: 1em;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-shadow: 0px 0px 16px black;
-          box-shadow: 0px 0px 16px black;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 16px black;
   border-radius: 15px;
 }
-
 .login .form_container * {
   margin-bottom: 1em;
   width: 100%;
 }
-
 .login .form_container form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-
 .login .form_container form h2 {
   text-align: center;
   color: #f33f90;
   font-size: 1.75em;
 }
-
 .login .form_container form label {
   margin-bottom: 0;
   text-align: left;
   font-size: 1.1em;
 }
-
 .login .form_container form input {
   height: 2em;
   font-size: 1.1em;
@@ -868,12 +603,10 @@ button {
   border: 1px solid gray;
   padding-left: 1em;
 }
-
 .login .form_container form p {
   margin-bottom: 0;
   text-align: center;
 }
-
 .login .form_container form p span {
   color: #f33f90;
   cursor: pointer;
@@ -882,13 +615,10 @@ button {
 @media screen and (max-width: 600px) {
   .aside_positioning {
     right: 50%;
-    -webkit-transform: translate(50%, -50%);
-            transform: translate(50%, -50%);
+    transform: translate(50%, -50%);
   }
   .util_buttons {
     left: 50%;
-    -webkit-transform: translate(-50%);
-            transform: translate(-50%);
+    transform: translate(-50%);
   }
-}
-/*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=App.css.map */

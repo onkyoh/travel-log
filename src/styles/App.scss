@@ -34,7 +34,8 @@ body {
     height: 100%;
 }
 
-.app, .map {
+.app,
+.map {
     width: 100%;
     height: 100%;
 }
@@ -51,11 +52,13 @@ body {
     background-color: $background;
     border-radius: 15px 15px 0 0;
     box-shadow: 0px 0px 8px black;
+
     button {
         @include flexCenter();
         height: 2em;
         font-size: 1.1em;
         padding: 0 0.5em;
+
         img {
             width: 1.5em;
             height: 1.5em;
@@ -70,6 +73,7 @@ body {
         border-radius: 5px;
         outline: none;
         padding-left: 0.5em;
+
         &:focus {
             box-shadow: 0px 0px 4px black;
         }
@@ -108,6 +112,7 @@ button {
     width: 2em;
     height: 2em;
     @include flexCenter();
+
     img {
         height: 100%;
         filter: grayscale(1) brightness(3);
@@ -125,13 +130,16 @@ button {
 .log_button_group {
     @include flexCenter();
     width: 300px;
+
     button {
         width: 100%;
         border-radius: 0px;
         background-color: white;
         color: $main-pink;
         border: 1px solid $main-pink;
-        &:nth-of-type(1), &:nth-of-type(2) {
+
+        &:nth-of-type(1),
+        &:nth-of-type(2) {
             border-right: none;
         }
     }
@@ -142,6 +150,7 @@ button {
     height: 60vh;
     background-color: $background;
     overflow-y: auto;
+
     .view_dialog {
         text-align: center;
         padding-top: 3em;
@@ -152,6 +161,7 @@ button {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -165,6 +175,7 @@ button {
     left: 0;
     background-color: rgba(30, 30, 30, 0.7);
     @include flexCenter();
+
     &::after {
         content: "";
         height: 50px;
@@ -178,12 +189,13 @@ button {
 }
 
 .create_log {
-    > button {
+    >button {
         position: relative;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
     }
+
     form {
         @include flexCenter();
         flex-direction: column;
@@ -192,16 +204,19 @@ button {
         overflow-y: auto;
         padding: 1em 0;
         background-color: $background;
+
         div {
             width: 90%;
             text-align: center;
             padding-bottom: 1em;
+
             label {
                 display: block;
                 text-align: start;
                 width: 100%;
                 padding-bottom: 0.5em;
             }
+
             input {
                 width: 90%;
                 font-size: 1.1em;
@@ -210,15 +225,18 @@ button {
                 border-radius: 5px;
                 padding: 0.25em 0;
                 padding-left: 0.5em;
+
                 &:focus {
                     outline: $main-pink 2px solid;
                 }
             }
+
             input[type='checkbox'] {
                 width: auto;
                 position: relative;
                 width: 1em;
                 height: 1em;
+
                 &::after {
                     position: absolute;
                     content: "Yes";
@@ -234,6 +252,7 @@ button {
                     transform: translate(-50%, -50%);
                     cursor: pointer;
                 }
+
                 &:checked {
                     &::after {
                         content: '\2713';
@@ -242,6 +261,7 @@ button {
                     }
                 }
             }
+
             textarea {
                 width: 90%;
                 height: 100px;
@@ -250,36 +270,44 @@ button {
                 border: none;
                 border-radius: 5px;
                 padding-left: 0.5em;
+
                 &:focus {
                     outline: $main-pink 2px solid;
                 }
             }
+
             select {
                 width: 90%;
                 height: 2em;
                 border: 1px solid $main-pink;
                 border-radius: 5px;
                 font-size: 1.1em;
+
                 option {
                     text-overflow: ellipsis;
                 }
+
                 &:focus {
                     border: 2px solid $main-pink;
                     outline: none;
                 }
             }
+
             .marker_input {
                 @include flexCenter();
                 justify-content: space-between;
                 width: 90%;
                 margin: auto;
                 padding: 0;
+
                 button {
                     height: 1.75em;
                 }
+
                 input[type='checkbox'] {
                     width: 3em;
                     height: 1.5em;
+
                     &::after {
                         content: "Set";
                         width: 3em;
@@ -287,12 +315,14 @@ button {
                         font-size: 1em;
                         padding: 0 0.1em;
                     }
+
                     &:checked {
                         &::after {
                             content: "Setting"
                         }
                     }
                 }
+
                 span {
                     @include flexCenter();
                     border-radius: 5px;
@@ -303,21 +333,25 @@ button {
                     background-color: white;
                 }
             }
+
             div {
                 width: 100%;
             }
         }
+
         .date_input {
             width: 90%;
             @include flexCenter();
             gap: 1em;
             margin: auto;
             padding: 0;
+
             button {
                 height: 2em;
                 font-size: 1em;
             }
         }
+
         .trip_input {
             label {
                 padding-bottom: 1em;
@@ -332,59 +366,67 @@ button {
     flex-direction: column;
     justify-content: flex-start;
     background-color: $background;
+
     .view_details {
         width: 95%;
         padding-bottom: 1em;
         text-align: center;
+
         h5 {
             font-size: 1.3em;
             font-family: $marker-font;
             padding-bottom: 0.5em;
         }
+
         p {
             padding: 0.5em;
             color: rgb(30, 30, 30);
         }
     }
- .polaroid_grid {
-    @include flexCenter();
-    flex-wrap: wrap;
-    justify-content: space-around;
-    row-gap: 1.5em;
-    padding: 0.5em;
-    width: 100%;
-    .polaroid {
-        height: calc( 110px + 1.75em);
-        width: 110px;
-        border: 3px solid white;
-        border-bottom: none;
-        box-sizing: content-box;
+
+    .polaroid_grid {
         @include flexCenter();
-        flex-direction: column;
-        background-color: white;
-        box-shadow: 0px 0px 4px black;
-        text-decoration: none;
-        cursor: pointer;
-        > div {
-            height: 110px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        row-gap: 1.5em;
+        padding: 0.5em;
+        width: 100%;
+
+        .polaroid {
+            height: calc(110px + 1.75em);
             width: 110px;
+            border: 3px solid white;
+            border-bottom: none;
+            box-sizing: content-box;
             @include flexCenter();
-            background-color: rgb(30, 30, 30);
-            img {
-                max-height: 110px;
-                max-width: 100%;
+            flex-direction: column;
+            background-color: white;
+            box-shadow: 0px 0px 4px black;
+            text-decoration: none;
+            cursor: pointer;
+
+            >div {
+                height: 110px;
+                width: 110px;
+                @include flexCenter();
+                background-color: rgb(30, 30, 30);
+
+                img {
+                    max-height: 110px;
+                    max-width: 100%;
+                }
+            }
+
+            span {
+                height: 1.75em;
+                @include flexCenter();
+                font-family: $marker-font;
+                font-size: 0.9em;
+                color: black;
             }
         }
-        span {
-            height: 1.75em;
-            @include flexCenter();
-            font-family: $marker-font;
-            font-size: 0.9em;
-            color: black;
-        }
     }
- }
-}   
+}
 
 .edit_buttons {
     @include flexCenter();
@@ -392,6 +434,7 @@ button {
     width: 100%;
     height: 100%;
     gap: 1em;
+
     * {
         width: 30%;
     }
@@ -401,17 +444,21 @@ button {
     @include flexCenter();
     flex-direction: column;
     gap: 0.5em;
+
     input[type="file"] {
         margin-top: 1em;
     }
+
     p {
         padding-top: 0.5em;
     }
+
     .pic_grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         width: 100%;
         gap: 1em;
+
         div {
             width: 100%;
             aspect-ratio: 1/1;
@@ -420,13 +467,16 @@ button {
             outline: 2px solid $main-pink;
             border-radius: 15px;
             overflow: hidden;
+
             img {
                 max-width: 100%;
                 max-height: 100%;
             }
         }
+
         .selected_overlay {
             position: relative;
+
             &::after {
                 content: "";
                 position: absolute;
@@ -446,11 +496,13 @@ button {
     height: 80%;
     padding: 0.5em;
     gap: 1em;
+
     input[type="checkbox"] {
         height: 2em;
         width: 2em;
         background-color: $main-pink;
         position: relative;
+
         &:checked {
             &::after {
                 content: '\2713';
@@ -509,21 +561,23 @@ button {
     border-radius: 15px;
     font-size: 1.1em;
     font-weight: 800;
+
     button {
         &:first-of-type {
             margin-left: auto;
             padding: 0.5em;
             line-height: 50%;
             font-weight: bold;
-        }    
+        }
     }
-    
+
 }
 
 .login {
     @include flexCenter();
     width: 100%;
     height: 100%;
+
     .form_container {
         width: calc(min(95%, 400px));
         padding: 1em;
@@ -531,24 +585,29 @@ button {
         @include flexCenter();
         box-shadow: 0px 0px 16px black;
         border-radius: 15px;
+
         * {
             margin-bottom: 1em;
             width: 100%
         }
+
         form {
             @include flexCenter();
             flex-direction: column;
+
             h2 {
                 text-align: center;
                 color: #f33f90;
-                font-size: 1.75em;  
+                font-size: 1.75em;
 
             }
+
             label {
                 margin-bottom: 0;
                 text-align: left;
                 font-size: 1.1em;
             }
+
             input {
                 height: 2em;
                 font-size: 1.1em;
@@ -556,9 +615,11 @@ button {
                 border: 1px solid gray;
                 padding-left: 1em;
             }
+
             p {
                 margin-bottom: 0;
                 text-align: center;
+
                 span {
                     color: $main-pink;
                     cursor: pointer;
@@ -573,6 +634,7 @@ button {
         right: 50%;
         transform: translate(50%, -50%);
     }
+
     .util_buttons {
         left: 50%;
         transform: translate(-50%);
